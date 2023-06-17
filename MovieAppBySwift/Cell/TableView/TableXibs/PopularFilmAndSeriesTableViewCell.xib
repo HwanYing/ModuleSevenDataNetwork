@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="289" id="KGk-i7-Jjw" customClass="PopularFilmAndSeriesTableViewCell" customModule="MovieAppBySwift" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="428" height="289"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="428" height="289"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BEST POPULAR FILM AND SERIES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tw0-9v-azg">
+                        <rect key="frame" x="16" y="8" width="232" height="21"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="7tG-kX-uGn">
+                        <rect key="frame" x="0.0" y="39" width="428" height="250"/>
+                        <color key="backgroundColor" name="color-primary"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="250" id="cO6-Hc-rus"/>
+                        </constraints>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="16" minimumInteritemSpacing="16" id="lKL-gI-cdQ">
+                            <size key="itemSize" width="128" height="128"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                    </collectionView>
+                </subviews>
+                <color key="backgroundColor" name="color-primary"/>
+                <constraints>
+                    <constraint firstItem="Tw0-9v-azg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="1OR-Zm-tZT"/>
+                    <constraint firstAttribute="bottom" secondItem="7tG-kX-uGn" secondAttribute="bottom" id="1Qz-8x-Cka"/>
+                    <constraint firstItem="7tG-kX-uGn" firstAttribute="top" secondItem="Tw0-9v-azg" secondAttribute="bottom" constant="10" id="88G-lM-iUd"/>
+                    <constraint firstAttribute="trailing" secondItem="7tG-kX-uGn" secondAttribute="trailing" id="9ga-HQ-s9i"/>
+                    <constraint firstItem="Tw0-9v-azg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="FIn-ss-rgg"/>
+                    <constraint firstItem="7tG-kX-uGn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Xvs-fs-1CS"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="popularCollectionView" destination="7tG-kX-uGn" id="kIs-hc-NvP"/>
+                <outlet property="titleLabel" destination="Tw0-9v-azg" id="gSK-pB-VMd"/>
+            </connections>
+            <point key="canvasLocation" x="268.70229007633588" y="22.183098591549296"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="color-primary">
+            <color red="0.078431372549019607" green="0.10588235294117647" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

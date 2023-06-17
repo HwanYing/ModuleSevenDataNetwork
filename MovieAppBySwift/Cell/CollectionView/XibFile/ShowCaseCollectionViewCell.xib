@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ShowCaseCollectionViewCell" customModule="MovieAppBySwift" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="289" height="184"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="289" height="184"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="KoreanWoman" translatesAutoresizingMaskIntoConstraints="NO" id="eac-pe-gYW">
+                        <rect key="frame" x="0.0" y="0.0" width="289" height="184"/>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wj2-6l-hVA">
+                        <rect key="frame" x="0.0" y="0.0" width="289" height="184"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    </view>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="yXi-RI-jlx">
+                        <rect key="frame" x="120.66666666666669" y="69" width="48" height="46.666666666666671"/>
+                        <color key="tintColor" name="color-yellow"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="48" id="b77-ii-vaJ"/>
+                            <constraint firstAttribute="height" constant="48" id="n4n-Hq-FUt"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="JUNG-E" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bZS-ug-6w1">
+                        <rect key="frame" x="16" y="123.00000000000001" width="257" height="21.666666666666671"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4 April 2023" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dhQ-Qd-eQd">
+                        <rect key="frame" x="16" y="148.66666666666666" width="89.666666666666671" height="19.333333333333343"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="Wj2-6l-hVA" firstAttribute="leading" secondItem="eac-pe-gYW" secondAttribute="leading" id="Bcg-Ou-BEx"/>
+                <constraint firstAttribute="bottom" secondItem="dhQ-Qd-eQd" secondAttribute="bottom" constant="16" id="Cm4-wQ-5AV"/>
+                <constraint firstItem="bZS-ug-6w1" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="Ge0-H7-BxU"/>
+                <constraint firstItem="yXi-RI-jlx" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Npz-zR-cqJ"/>
+                <constraint firstAttribute="trailing" secondItem="bZS-ug-6w1" secondAttribute="trailing" constant="16" id="O0W-lx-VIK"/>
+                <constraint firstItem="Wj2-6l-hVA" firstAttribute="bottom" secondItem="eac-pe-gYW" secondAttribute="bottom" id="Oy0-FF-VLP"/>
+                <constraint firstItem="dhQ-Qd-eQd" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="T4l-Zi-hCo"/>
+                <constraint firstItem="yXi-RI-jlx" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="Tyg-s2-StE"/>
+                <constraint firstItem="eac-pe-gYW" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="WlH-r4-pcc"/>
+                <constraint firstItem="eac-pe-gYW" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="YQB-dc-f7x"/>
+                <constraint firstAttribute="bottom" secondItem="eac-pe-gYW" secondAttribute="bottom" id="jVq-Lc-Z73"/>
+                <constraint firstAttribute="trailing" secondItem="eac-pe-gYW" secondAttribute="trailing" id="lO8-Fy-88Q"/>
+                <constraint firstItem="dhQ-Qd-eQd" firstAttribute="top" secondItem="bZS-ug-6w1" secondAttribute="bottom" constant="4" id="lW8-Ph-YEP"/>
+                <constraint firstItem="Wj2-6l-hVA" firstAttribute="top" secondItem="eac-pe-gYW" secondAttribute="top" id="maD-fF-RcT"/>
+                <constraint firstItem="Wj2-6l-hVA" firstAttribute="trailing" secondItem="eac-pe-gYW" secondAttribute="trailing" id="y7a-Z0-mC3"/>
+            </constraints>
+            <size key="customSize" width="289" height="184"/>
+            <connections>
+                <outlet property="contentTitle" destination="bZS-ug-6w1" id="w4n-tk-X86"/>
+                <outlet property="imageViewPoster" destination="eac-pe-gYW" id="HyP-F9-eV8"/>
+                <outlet property="labelReleaseDate" destination="dhQ-Qd-eQd" id="wey-qK-ZcD"/>
+            </connections>
+            <point key="canvasLocation" x="237.40458015267174" y="67.605633802816911"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="KoreanWoman" width="348.33334350585938" height="232.33332824707031"/>
+        <image name="play.circle.fill" catalog="system" width="128" height="123"/>
+        <namedColor name="color-yellow">
+            <color red="1" green="0.80784313725490198" blue="0.050980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

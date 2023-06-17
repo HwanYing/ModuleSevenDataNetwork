@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="245" id="KGk-i7-Jjw" customClass="ShowCaseTableViewCell" customModule="MovieAppBySwift" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="388" height="245"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="388" height="245"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SHOWCASES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QGi-br-CZ7">
+                        <rect key="frame" x="16" y="24" width="79.666666666666671" height="14.333333333333336"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MORE SHOWCASES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Jb-y2-4ny">
+                        <rect key="frame" x="253" y="24" width="119" height="14.333333333333336"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="gIl-tT-VYH">
+                        <rect key="frame" x="0.0" y="48.333333333333343" width="388" height="220.00000000000003"/>
+                        <color key="backgroundColor" name="color-blue-bg"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="220" id="LQf-bo-9aL"/>
+                        </constraints>
+                        <inset key="scrollIndicatorInsets" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="16" minimumInteritemSpacing="16" id="NRy-5l-T3j">
+                            <size key="itemSize" width="128" height="128"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="16" minY="0.0" maxX="16" maxY="8"/>
+                        </collectionViewFlowLayout>
+                    </collectionView>
+                </subviews>
+                <color key="backgroundColor" name="color-blue-bg"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="gIl-tT-VYH" secondAttribute="bottom" id="1gf-Ce-uvM"/>
+                    <constraint firstItem="QGi-br-CZ7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="3JK-oC-Myo"/>
+                    <constraint firstItem="gIl-tT-VYH" firstAttribute="top" secondItem="QGi-br-CZ7" secondAttribute="bottom" constant="10" id="Dbo-p7-83k"/>
+                    <constraint firstItem="9Jb-y2-4ny" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="IiS-Tj-yWx"/>
+                    <constraint firstAttribute="trailing" secondItem="gIl-tT-VYH" secondAttribute="trailing" id="ZUj-9G-G6H"/>
+                    <constraint firstItem="gIl-tT-VYH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="khE-I3-gPz"/>
+                    <constraint firstAttribute="trailing" secondItem="9Jb-y2-4ny" secondAttribute="trailing" constant="16" id="r2F-ri-zWT"/>
+                    <constraint firstItem="QGi-br-CZ7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="v0S-i1-BoD"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="heightForShowCaseCollectionView" destination="LQf-bo-9aL" id="Z4n-sM-UNq"/>
+                <outlet property="moreShowCaseLabel" destination="9Jb-y2-4ny" id="UhN-W0-PsV"/>
+                <outlet property="showCaseCollectionView" destination="gIl-tT-VYH" id="Fht-vu-UqR"/>
+            </connections>
+            <point key="canvasLocation" x="65.648854961832058" y="-30.633802816901412"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="color-blue-bg">
+            <color red="0.11400000005960464" green="0.14499999582767487" blue="0.19599999487400055" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

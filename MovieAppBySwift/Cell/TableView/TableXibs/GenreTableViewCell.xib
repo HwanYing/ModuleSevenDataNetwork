@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="242" id="KGk-i7-Jjw" customClass="GenreTableViewCell" customModule="MovieAppBySwift" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="430" height="242"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="430" height="242"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Y9i-V9-Fcp">
+                        <rect key="frame" x="0.0" y="16" width="430" height="45"/>
+                        <color key="backgroundColor" name="color-primary"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="45" id="8vT-vF-Spv"/>
+                        </constraints>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="16" minimumInteritemSpacing="16" id="BFU-3K-xOp">
+                            <size key="itemSize" width="128" height="128"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                    </collectionView>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="vxC-GE-sep">
+                        <rect key="frame" x="0.0" y="77" width="430" height="250"/>
+                        <color key="backgroundColor" name="color-primary"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="250" id="z0g-Qd-kwh"/>
+                        </constraints>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="16" minimumInteritemSpacing="16" id="Sro-zT-6RZ">
+                            <size key="itemSize" width="128" height="128"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                    </collectionView>
+                </subviews>
+                <color key="backgroundColor" name="color-primary"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="vxC-GE-sep" secondAttribute="trailing" id="4FV-vx-qS5"/>
+                    <constraint firstItem="Y9i-V9-Fcp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="9jD-mq-EOh"/>
+                    <constraint firstItem="vxC-GE-sep" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Jkc-e3-Hld"/>
+                    <constraint firstItem="vxC-GE-sep" firstAttribute="top" secondItem="Y9i-V9-Fcp" secondAttribute="bottom" constant="16" id="Z3n-KH-v7b"/>
+                    <constraint firstAttribute="bottom" secondItem="vxC-GE-sep" secondAttribute="bottom" id="jqs-ja-MDJ"/>
+                    <constraint firstItem="Y9i-V9-Fcp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="xBD-oz-joy"/>
+                    <constraint firstAttribute="trailing" secondItem="Y9i-V9-Fcp" secondAttribute="trailing" id="xXf-DM-lbL"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="genreCollectionView" destination="Y9i-V9-Fcp" id="MRS-c1-Wgz"/>
+                <outlet property="movieCollectionView" destination="vxC-GE-sep" id="LBI-c8-tCs"/>
+            </connections>
+            <point key="canvasLocation" x="196.94656488549617" y="89.436619718309871"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <namedColor name="color-primary">
+            <color red="0.078431372549019607" green="0.10588235294117647" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
