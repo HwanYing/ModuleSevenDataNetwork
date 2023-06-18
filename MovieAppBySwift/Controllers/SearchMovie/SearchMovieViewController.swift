@@ -7,12 +7,11 @@
 
 import UIKit
 
-class SearchMovieViewController: UIViewController {
+class SearchMovieViewController: UIViewController, MovieItemDelegate {
 
     @IBOutlet weak var collectionViewSearch: UICollectionView!
-    
+
     private let searchBar = UISearchBar()
-    var delegate: MovieItemDelegate?=nil
 
     private var searchResult:  [MovieResult] = []
     private let itemSpacing: CGFloat = 10
@@ -56,6 +55,10 @@ class SearchMovieViewController: UIViewController {
             print(error.description)
         }
     }
+    func onTapMovieItem(id: Int) {
+        navigateToMovieDetailsVC(movieId: id)
+    }
+    
 }
 
 extension SearchMovieViewController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -88,15 +91,14 @@ extension SearchMovieViewController: UICollectionViewDelegateFlowLayout {
         let totalSpacing: CGFloat = (itemSpacing * CGFloat(numberOfItemsPerRow - 1)) + collectionView.contentInset.left + collectionView.contentInset.right
         let itemWidth: CGFloat = (collectionView.frame.width / CGFloat(numberOfItemsPerRow)) - (totalSpacing / CGFloat(numberOfItemsPerRow))
         
-        return CGSize(width: itemWidth, height: collectionView.frame.size.height)
+        return CGSize(width: itemWidth, height: 250)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return itemSpacing
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = searchResult[indexPath.row]
-        delegate?.onTapMovieItem(id: item.id ?? 0)
-
+        self.onTapMovieItem(id: item.id ?? 0)
     }
 }
 extension SearchMovieViewController: UISearchBarDelegate {
