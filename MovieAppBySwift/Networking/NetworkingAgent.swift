@@ -158,7 +158,7 @@ struct MovieDBNetworkAgent {
     // best actor list
     func getPeopleList(page: Int = 1, success: @escaping (ActorListResult) -> Void, failure: @escaping (String) -> Void){
         //{{baseUrl}}/3/person/popular?language=en-US&page=1
-        let url = URL(string: "\(AppConstants.BaseURL)/person/popular?page=\(page)&language=en-US&page=1")!
+        let url = URL(string: "\(AppConstants.BaseURL)/person/popular?page=\(page)&language=en-US")!
         AF.request(url, headers: headers).responseDecodable(of: ActorListResult.self){ resp in
             switch resp.result {
             case .success(let data):

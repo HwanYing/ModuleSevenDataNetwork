@@ -29,13 +29,14 @@ class BestActorsTableViewCell: UITableViewCell {
         moreActorsLabel.underLineText(text: "MORE ACTORS")
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapMoreLabel))
+        moreActorsLabel.isUserInteractionEnabled = true
         moreActorsLabel.addGestureRecognizer(tapGesture)
         
         setUpCollectionViewCells()
     }
     
     @objc func didTapMoreLabel() {
-        delegate?.onTapSeeMoreActor()
+        delegate?.onTapSeeMoreActor(data: data!)
     }
     private func setUpCollectionViewCells() {
         bestActorCollectionView.dataSource = self

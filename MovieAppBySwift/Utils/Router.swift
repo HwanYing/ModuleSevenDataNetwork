@@ -33,6 +33,12 @@ extension UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    func navigateToActorDetailsViewController(actorId: Int) {
+        let vc = ActorDetailsViewController()
+        vc.actorId = actorId
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     func navigateToMovieDetailsVC(movieId: Int) {
       
         guard let vc = UIStoryboard.mainStoryBoard().instantiateViewController(identifier: DetailsViewController.identifier) as? DetailsViewController else { return }

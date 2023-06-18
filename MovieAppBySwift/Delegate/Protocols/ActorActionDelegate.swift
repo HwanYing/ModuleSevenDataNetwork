@@ -13,6 +13,6 @@ protocol ActorActionDelegate {
     
     func onTapActorImage(actorId: Int)
     
-    func onTapSeeMoreActor()
+    func onTapSeeMoreActor(data: ActorListResult)
 
 }

@@ -43,14 +43,17 @@ class MainMovieViewController: UIViewController, MovieItemDelegate, ActorActionD
         movieListTableView.registerForCell(identifier: ShowCaseTableViewCell.identifier)
         movieListTableView.registerForCell(identifier: BestActorsTableViewCell.identifier)
     }
+    
     func onTapMovieItem(id: Int) {
         navigateToMovieDetailsVC(movieId: id)
     }
+    
     func onTapFavourite(isFavourite: Bool) {
         print("onTap favourite")
     }
-    func onTapSeeMoreActor() {
-        navigateToViewMoreActorsViewController(data: bestActorList!)
+    
+    func onTapSeeMoreActor(data: ActorListResult) {
+        navigateToViewMoreActorsViewController(data: data)
     }
     
     @IBAction func clickSearch(_ sender: UIBarButtonItem) {
@@ -58,10 +61,7 @@ class MainMovieViewController: UIViewController, MovieItemDelegate, ActorActionD
     }
     
     func onTapActorImage(actorId: Int) {
-//        let vc = ActorDetailsViewController()
-//        let nav = UINavigationController(rootViewController: vc)
-//        vc.actorId = actorId
-//        present(nav, animated: true)
+        navigateToActorDetailsViewController(actorId: actorId)
     }
   
     

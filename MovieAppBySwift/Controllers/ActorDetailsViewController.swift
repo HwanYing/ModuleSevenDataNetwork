@@ -11,7 +11,6 @@ class ActorDetailsViewController: UIViewController {
 
     private let networkAgent = MovieDBNetworkAgent.shared
 
-    @IBOutlet weak var imgViewBack: UIImageView!
     @IBOutlet weak var imgViewActor: UIImageView!
     @IBOutlet weak var actorNameLabel: UILabel!
     @IBOutlet weak var actorDOBLabel: UILabel!
@@ -35,7 +34,7 @@ class ActorDetailsViewController: UIViewController {
         print("details for this actor id>>>>", actorId)
 
         fetchActorBio(actorId: actorId)
-        
+        fetchTVCredits(actorId: actorId)
     }
     
     private func bindData(data: ActorDetailsResponse) {

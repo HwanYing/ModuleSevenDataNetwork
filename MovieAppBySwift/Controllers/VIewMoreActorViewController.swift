@@ -25,6 +25,8 @@ class VIewMoreActorViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        initView()
+        initState()
     }
     private func initView() {
         setupCollectionView()
@@ -53,7 +55,9 @@ class VIewMoreActorViewController: UIViewController {
         collectionViewActors.dataSource = self
         collectionViewActors.showsHorizontalScrollIndicator = false
         collectionViewActors.showsVerticalScrollIndicator = false
-        collectionViewActors.contentInset = UIEdgeInsets.init(top: 16, left: 16, bottom: 16, right: 16)
+        collectionViewActors.contentInset = UIEdgeInsets.init(top: 10, left: 10, bottom: 10, right: 10)
+        collectionViewActors.registerCollectionCell(identifier: BestActorsCollectionViewCell.identifier)
+
         if let layout = collectionViewActors.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .vertical
         }
@@ -84,8 +88,9 @@ extension VIewMoreActorViewController: UICollectionViewDataSource, UICollectionV
 }
 extension VIewMoreActorViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let totalSpacing: CGFloat = (itemSpacing * CGFloat(numberOfItemsPerRow - 1)) + collectionView.frame.size.width / 3
-        let itemWidth: CGFloat = (collectionView.frame.width / CGFloat(numberOfItemsPerRow)) - (totalSpacing - itemSpacing)
+        let totalSpacing: CGFloat = (itemSpacing * CGFloat(numberOfItemsPerRow - 1)) + collectionView.contentInset.left + collectionView.contentInset.right
+        let itemWidth: CGFloat = (collectionView.frame.width / CGFloat(numberOfItemsPerRow)) - (totalSpacing / CGFloat(numberOfItemsPerRow))
+       
         let itemHeight: CGFloat = itemWidth * 1.5
         return CGSize(width: itemWidth, height: itemHeight)
     }

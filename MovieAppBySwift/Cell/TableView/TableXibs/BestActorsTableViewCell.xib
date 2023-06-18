@@ -31,7 +31,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="NsM-C9-PU3">
-                        <rect key="frame" x="0.0" y="42.333333333333343" width="312" height="180"/>
+                        <rect key="frame" x="0.0" y="50.333333333333343" width="312" height="180"/>
                         <color key="backgroundColor" name="color-primary"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="180" id="h8o-IF-hNZ"/>
@@ -48,7 +48,7 @@
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="tyq-N9-cZb" secondAttribute="trailing" constant="16" id="7JC-GB-Zis"/>
                     <constraint firstItem="tyq-N9-cZb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="QY8-by-YFS"/>
-                    <constraint firstItem="NsM-C9-PU3" firstAttribute="top" secondItem="1qA-Yx-2OR" secondAttribute="bottom" constant="8" id="RsE-iL-KbY"/>
+                    <constraint firstItem="NsM-C9-PU3" firstAttribute="top" secondItem="1qA-Yx-2OR" secondAttribute="bottom" constant="16" id="RsE-iL-KbY"/>
                     <constraint firstItem="1qA-Yx-2OR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="aba-CJ-SNb"/>
                     <constraint firstAttribute="bottom" secondItem="NsM-C9-PU3" secondAttribute="bottom" id="hSe-XJ-HuN"/>
                     <constraint firstItem="1qA-Yx-2OR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="sFD-Qz-fB2"/>
