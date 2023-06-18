@@ -42,11 +42,16 @@ extension UIViewController {
     func navigateToMovieDetailsVC(movieId: Int) {
       
         guard let vc = UIStoryboard.mainStoryBoard().instantiateViewController(identifier: DetailsViewController.identifier) as? DetailsViewController else { return }
-        vc.modalPresentationStyle = .fullScreen
+//        vc.modalPresentationStyle = .fullScreen
         vc.movieID = movieId
-        vc.modalTransitionStyle = .flipHorizontal
-        present(vc, animated: true)
+//        vc.modalTransitionStyle = .flipHorizontal
+//        present(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    func navigateToSearchMovieVC() {
+        let vc = SearchMovieViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 

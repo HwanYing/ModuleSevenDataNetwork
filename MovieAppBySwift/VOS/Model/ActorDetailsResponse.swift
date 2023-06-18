@@ -12,7 +12,7 @@ struct ActorDetailsResponse: Codable {
     let adult: Bool?
     let alsoKnownAs: [String]?
     let biography, birthday: String?
-    let deathday: JSONNull?
+    let deathday: String?
     let gender: Int?
     let homepage: String?
     let id: Int?
@@ -32,3 +32,4 @@ struct ActorDetailsResponse: Codable {
         case profilePath = "profile_path"
     }
 }
+

@@ -17,6 +17,18 @@ struct MovieDBNetworkAgent {
     ]
     private init() {}
     
+    // search movie
+    func searchMovieByKeyword(query: String, page: String ,success: @escaping (MovieListResult) -> Void, failure: @escaping (String) -> Void) {
+        let url = URL(string: "\(AppConstants.BaseURL)/search/movie?query=\(query)&page=\(page)&language=en-US")!
+        AF.request(url, headers: headers).responseDecodable(of: MovieListResult.self){ resp in
+            switch resp.result {
+            case .success(let data):
+                success(data)
+            case .failure(let error):
+                failure(error.errorDescription!)
+            }
+        }
+    }
     // get tv credits for actor info page
     func getTVCreditsList(id: Int, success: @escaping (TVCreditsResponse) -> Void, failure: @escaping (String) -> Void) {
         let url = URL(string: "\(AppConstants.BaseURL)/person/\(id)/tv_credits?language=en-US")!

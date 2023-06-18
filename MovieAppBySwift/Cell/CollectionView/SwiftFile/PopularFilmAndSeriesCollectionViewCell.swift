@@ -13,7 +13,8 @@ class PopularFilmAndSeriesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageViewBackdrop: UIImageView!
     @IBOutlet weak var ratingStar: RatingControl!
     @IBOutlet weak var labelRating: UILabel!
-    
+    var onTapItem : ((Int)->Void) = { _ in} // Closure
+
     var data: MovieResult? {
         didSet {
             if let data = data {
@@ -24,7 +25,8 @@ class PopularFilmAndSeriesCollectionViewCell: UICollectionViewCell {
                 imageViewBackdrop.sd_setImage(with: URL(string: posterPath))
                 
                 let voteAverage = data.voteAverage ?? 0.0
-                labelRating.text = "\(voteAverage)" // api max - 10, me max - 5
+                let floorValue = floor(voteAverage * 10) / 10.0
+                labelRating.text = "\(floorValue)" // api max - 10, me max - 5
                 ratingStar.rating = Int(voteAverage * 0.5)
             }
         }

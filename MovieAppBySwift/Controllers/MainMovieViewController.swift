@@ -26,6 +26,8 @@ class MainMovieViewController: UIViewController, MovieItemDelegate, ActorActionD
         
         setUpTableViewCell()
         
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "")
+        
         fetchUpcomingMovieList()
         fetchPopularMovieList()
         fetchPopularTVSeriesList()
@@ -57,7 +59,7 @@ class MainMovieViewController: UIViewController, MovieItemDelegate, ActorActionD
     }
     
     @IBAction func clickSearch(_ sender: UIBarButtonItem) {
-        print("Search button click!")
+        navigateToSearchMovieVC()
     }
     
     func onTapActorImage(actorId: Int) {

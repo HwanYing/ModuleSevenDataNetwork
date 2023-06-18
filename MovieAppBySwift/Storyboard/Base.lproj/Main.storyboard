@@ -79,22 +79,6 @@
                                                                 <rect key="frame" x="76" y="96" width="240" height="128"/>
                                                                 <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                                             </view>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.left.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="3ro-Dd-FVC">
-                                                                <rect key="frame" x="24" y="48.999999999999993" width="32" height="30.666666666666664"/>
-                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="32" id="2aC-b5-il4"/>
-                                                                    <constraint firstAttribute="height" constant="32" id="Qxs-Gf-SvB"/>
-                                                                </constraints>
-                                                            </imageView>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="magnifyingglass" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Ey5-Za-TnB">
-                                                                <rect key="frame" x="337" y="49" width="32" height="30.333333333333329"/>
-                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="32" id="Lyu-PH-NkL"/>
-                                                                    <constraint firstAttribute="width" constant="32" id="zdl-Qg-EKO"/>
-                                                                </constraints>
-                                                            </imageView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="r4L-tg-Wj2">
                                                                 <rect key="frame" x="24" y="94.666666666666671" width="345" height="225.33333333333331"/>
                                                                 <subviews>
@@ -243,11 +227,8 @@
                                                         <constraints>
                                                             <constraint firstItem="WMi-eR-iJT" firstAttribute="leading" secondItem="XXf-WX-n0k" secondAttribute="leading" id="2ME-ig-fw5"/>
                                                             <constraint firstAttribute="bottom" secondItem="WMi-eR-iJT" secondAttribute="bottom" id="GxP-v9-8uW"/>
-                                                            <constraint firstItem="Ey5-Za-TnB" firstAttribute="top" secondItem="XXf-WX-n0k" secondAttribute="top" constant="48" id="JcP-6u-HLb"/>
-                                                            <constraint firstItem="3ro-Dd-FVC" firstAttribute="top" secondItem="XXf-WX-n0k" secondAttribute="top" constant="48" id="NsZ-Oq-FND"/>
                                                             <constraint firstItem="r4L-tg-Wj2" firstAttribute="leading" secondItem="XXf-WX-n0k" secondAttribute="leading" constant="16" id="OMb-y6-8a0"/>
                                                             <constraint firstItem="WMi-eR-iJT" firstAttribute="top" secondItem="XXf-WX-n0k" secondAttribute="top" id="QNN-5Y-h4J"/>
-                                                            <constraint firstAttribute="trailing" secondItem="Ey5-Za-TnB" secondAttribute="trailing" constant="16" id="SEi-Y0-ajT"/>
                                                             <constraint firstAttribute="trailing" secondItem="r4L-tg-Wj2" secondAttribute="trailing" constant="16" id="SHd-QG-mrk"/>
                                                             <constraint firstItem="hxh-NR-aoy" firstAttribute="bottom" secondItem="WMi-eR-iJT" secondAttribute="bottom" id="UN7-C0-WTb"/>
                                                             <constraint firstAttribute="bottom" secondItem="r4L-tg-Wj2" secondAttribute="bottom" id="UrI-k8-7GM"/>
@@ -255,7 +236,6 @@
                                                             <constraint firstItem="hxh-NR-aoy" firstAttribute="leading" secondItem="WMi-eR-iJT" secondAttribute="leading" id="gR0-hO-XPi"/>
                                                             <constraint firstItem="hxh-NR-aoy" firstAttribute="trailing" secondItem="WMi-eR-iJT" secondAttribute="trailing" id="rev-9y-aoE"/>
                                                             <constraint firstItem="hxh-NR-aoy" firstAttribute="top" secondItem="WMi-eR-iJT" secondAttribute="top" id="umH-rK-pkn"/>
-                                                            <constraint firstItem="3ro-Dd-FVC" firstAttribute="leading" secondItem="XXf-WX-n0k" secondAttribute="leading" constant="24" id="yuB-U3-ihK"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2U0-U0-6Jr" userLabel="StoryLine">
@@ -632,7 +612,6 @@
                         <outlet property="collectionViewActors" destination="4RV-rr-NLQ" id="nm7-aP-jnx"/>
                         <outlet property="genreCollectionView" destination="hoF-KD-nru" id="ekx-on-e04"/>
                         <outlet property="imageViewMoviePoster" destination="WMi-eR-iJT" id="adp-g9-nYz"/>
-                        <outlet property="ivBack" destination="3ro-Dd-FVC" id="jQa-QG-oAX"/>
                         <outlet property="labelAboutMovieTitle" destination="0pY-Cr-zUM" id="zX2-wM-ulW"/>
                         <outlet property="labelDuration" destination="eLm-zJ-hzZ" id="qba-KC-77D"/>
                         <outlet property="labelGenreString" destination="fRN-M6-OBa" id="foS-s6-BES"/>
@@ -662,6 +641,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="OSx-7D-oBg">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" name="color-primary"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -681,7 +661,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="chevron.left.circle" catalog="system" width="128" height="123"/>
         <image name="clock" catalog="system" width="128" height="123"/>
         <image name="heart" catalog="system" width="128" height="107"/>
         <image name="magnifyingglass" catalog="system" width="128" height="117"/>

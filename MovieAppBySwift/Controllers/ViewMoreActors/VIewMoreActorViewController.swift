@@ -7,12 +7,12 @@
 
 import UIKit
 
-class VIewMoreActorViewController: UIViewController {
-
+class VIewMoreActorViewController: UIViewController, ActorActionDelegate {
+    
     @IBOutlet weak var collectionViewActors: UICollectionView!
     
     var initData: ActorListResult?
-    
+
     private var data: [ActorInfoResponse] = []
     
     private let itemSpacing: CGFloat = 10
@@ -49,7 +49,18 @@ class VIewMoreActorViewController: UIViewController {
 
 
     }
+    func onTapActorImage(actorId: Int) {
+        navigateToActorDetailsViewController(actorId: actorId)
+    }
+    func onTapFavourite(isFavourite: Bool) {
+        print("onTapFavorite")
+    }
     
+    func onTapSeeMoreActor(data: ActorListResult) {
+        print("onTapSeeMore")
+    }
+    
+
     func setupCollectionView() {
         collectionViewActors.delegate = self
         collectionViewActors.dataSource = self
@@ -96,5 +107,9 @@ extension VIewMoreActorViewController: UICollectionViewDelegateFlowLayout {
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return itemSpacing
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = data[indexPath.row]
+        self.onTapActorImage(actorId: item.id ?? 0)
     }
 }

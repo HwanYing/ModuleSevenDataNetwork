@@ -10,13 +10,11 @@ import UIKit
 class DetailsViewController: UIViewController {
     
     let networkAgent = MovieDBNetworkAgent.shared
-
-    @IBOutlet weak var ivBack: UIImageView!
     
     @IBOutlet weak var rateMovieButton: UIButton!
     
     @IBOutlet weak var similarMovieCollectionView: UICollectionView!
-    @IBOutlet weak var moreCreatorsLabel: UILabel!
+//    @IBOutlet weak var moreCreatorsLabel: UILabel!
     @IBOutlet weak var collectionViewActors: UICollectionView!
     @IBOutlet weak var productionCompanyCollectionView: UICollectionView!
     
@@ -97,9 +95,7 @@ class DetailsViewController: UIViewController {
     }
     
     private func addGestureRecognizers() {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(onTapBack))
-        ivBack.isUserInteractionEnabled = true
-        ivBack.addGestureRecognizer(gesture)
+       
     }
     // movie Trailer
     private func fetchMovieTrailer(id: Int) {
@@ -162,7 +158,8 @@ class DetailsViewController: UIViewController {
         
         labelReleasedYear.text = String(data.releaseDate?.split(separator: "-")[0] ?? "")
         labelMovieTitle.text = data.originalTitle
-        
+        self.navigationItem.title = data.originalTitle
+
         let runtimeHour = Int((data.runtime ?? 0) / 60)
         let runtimeMinute = Int((data.runtime ?? 0) % 60)
         
@@ -203,9 +200,7 @@ class DetailsViewController: UIViewController {
         // storyline
         storyContentLabel.text = data.overview
     }
-    @objc func onTapBack() {
-        dismiss(animated: true, completion: nil)
-    }
+    
     func onTapFavourite(isFavourite: Bool) {
         print("Tap for favourite list.....\(isFavourite)")
     }
