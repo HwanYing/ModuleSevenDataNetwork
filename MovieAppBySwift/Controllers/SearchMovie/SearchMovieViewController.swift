@@ -47,12 +47,15 @@ class SearchMovieViewController: UIViewController, MovieItemDelegate {
     }
     
     func searchContent(keyword: String, page: Int) {
-        networkAgent.searchMovieByKeyword(query: keyword, page: "\(page)") { data in
-            self.totalPage = data.totalPages ?? 1
-            self.searchResult.append(contentsOf: data.results ?? [MovieResult]())
-            self.collectionViewSearch.reloadData()
-        } failure: { error in
-            print(error.description)
+        networkAgent.searchMovieByKeyword(query: keyword, page: "\(page)") { result in
+            switch result {
+            case .success(let data):
+                self.totalPage = data.totalPages ?? 1
+                self.searchResult.append(contentsOf: data.results ?? [MovieResult]())
+                self.collectionViewSearch.reloadData()
+            case .failure(let error):
+                print(error.description)
+            }
         }
     }
     func onTapMovieItem(id: Int) {

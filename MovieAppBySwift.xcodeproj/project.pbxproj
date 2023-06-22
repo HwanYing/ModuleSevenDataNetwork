@@ -24,6 +24,8 @@
 		504F59CA2A3F3E9D00618042 /* SearchMovieViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 504F59C82A3F3E9D00618042 /* SearchMovieViewController.xib */; };
 		50568A3729E0428C00DFB982 /* DetailsGenreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50568A3529E0428C00DFB982 /* DetailsGenreCollectionViewCell.swift */; };
 		50568A3829E0428C00DFB982 /* DetailsGenreCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50568A3629E0428C00DFB982 /* DetailsGenreCollectionViewCell.xib */; };
+		505CC1292A4019770023F9FC /* MDBEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505CC1282A4019770023F9FC /* MDBEndpoint.swift */; };
+		505CC15C2A403B2F0023F9FC /* MovieDBNetworkAgentWithURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505CC15B2A403B2F0023F9FC /* MovieDBNetworkAgentWithURLSession.swift */; };
 		5069B85B29DBF90F00BC3872 /* PopularFilmAndSeriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5069B85929DBF90F00BC3872 /* PopularFilmAndSeriesTableViewCell.swift */; };
 		506F5D4929DB353C00A441A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506F5D4829DB353C00A441A3 /* AppDelegate.swift */; };
 		506F5D4B29DB353C00A441A3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506F5D4A29DB353C00A441A3 /* SceneDelegate.swift */; };
@@ -93,6 +95,8 @@
 		504F59C82A3F3E9D00618042 /* SearchMovieViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchMovieViewController.xib; sourceTree = "<group>"; };
 		50568A3529E0428C00DFB982 /* DetailsGenreCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsGenreCollectionViewCell.swift; sourceTree = "<group>"; };
 		50568A3629E0428C00DFB982 /* DetailsGenreCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsGenreCollectionViewCell.xib; sourceTree = "<group>"; };
+		505CC1282A4019770023F9FC /* MDBEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBEndpoint.swift; sourceTree = "<group>"; };
+		505CC15B2A403B2F0023F9FC /* MovieDBNetworkAgentWithURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDBNetworkAgentWithURLSession.swift; sourceTree = "<group>"; };
 		5069B85929DBF90F00BC3872 /* PopularFilmAndSeriesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularFilmAndSeriesTableViewCell.swift; sourceTree = "<group>"; };
 		506F5D4529DB353C00A441A3 /* MovieAppBySwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieAppBySwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		506F5D4829DB353C00A441A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -162,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				504A5AC42A2F10EB00B90F7C /* NetworkingAgent.swift */,
+				505CC15B2A403B2F0023F9FC /* MovieDBNetworkAgentWithURLSession.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -402,6 +407,7 @@
 			children = (
 				5074125829DC482D004FDF7B /* GenreVO.swift */,
 				5092B5A029DDB36C00F9D3EA /* MovieType.swift */,
+				505CC1282A4019770023F9FC /* MDBEndpoint.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -579,6 +585,7 @@
 				50BF143329DEF9B6005F12E2 /* DetailsViewController.swift in Sources */,
 				5092B59529DD631800F9D3EA /* BestActorsTableViewCell.swift in Sources */,
 				508ACBE42A305CFD0023BD69 /* ActorListResult.swift in Sources */,
+				505CC15C2A403B2F0023F9FC /* MovieDBNetworkAgentWithURLSession.swift in Sources */,
 				50793F382A3DCF6B00BD1C51 /* ActorDetailsResponse.swift in Sources */,
 				504459E329DC6C23002799D9 /* ShowCaseTableViewCell.swift in Sources */,
 				506F5D4D29DB353C00A441A3 /* MainMovieViewController.swift in Sources */,
@@ -606,6 +613,7 @@
 				508ACBE62A306DA50023BD69 /* MovieDetailsResponse.swift in Sources */,
 				504A5ACF2A2F162C00B90F7C /* SearchMovieResult.swift in Sources */,
 				50793F332A3DCD3000BD1C51 /* ActorDetailsViewController.swift in Sources */,
+				505CC1292A4019770023F9FC /* MDBEndpoint.swift in Sources */,
 				50BF143529DF030C005F12E2 /* Router.swift in Sources */,
 				50A522BF29DBECDE00F8528E /* RatingControl.swift in Sources */,
 				5074125929DC482D004FDF7B /* GenreVO.swift in Sources */,

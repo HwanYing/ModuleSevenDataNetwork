@@ -7,12 +7,13 @@
 
 import Foundation
 
-protocol ActorActionDelegate {
+protocol ActorActionDelegate { //: class
     
     func onTapFavourite(isFavourite: Bool)
     
     func onTapActorImage(actorId: Int)
     
     func onTapSeeMoreActor(data: ActorListResult)
+//    func onTapItem(data: ActorInfoResponse)
 
 }

@@ -49,21 +49,28 @@ class ActorDetailsViewController: UIViewController {
 
     // get actor bio
     func fetchActorBio(actorId: Int) {
-        networkAgent.getActorBio(actorId: actorId) { data in
-            self.bindData(data: data)
-        } failure: { error in
-            print(error)
+        networkAgent.getActorBio(id: actorId) { result in
+            switch result {
+            case .success(let data):
+                self.bindData(data: data)
+            case .failure(let error):
+                print(error)
+            }
         }
 
     }
     // get tv credits list
     func fetchTVCredits(actorId: Int) {
-        networkAgent.getTVCreditsList(id: actorId) { data in
-            self.tvCreditsList = data
-            self.tvCreditsCollectionView.reloadData()
-        } failure: { error in
-            print(error)
-        }
+        networkAgent.getTVCreditsList(id: actorId) { result in
+            switch result {
+            case .success(let data):
+                self.tvCreditsList = data
+                self.tvCreditsCollectionView.reloadData()
+            case .failure(let error):
+                print(error)
+            }
+            
+        } 
 
     }
 }

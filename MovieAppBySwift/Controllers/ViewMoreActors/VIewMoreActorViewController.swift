@@ -40,15 +40,17 @@ class VIewMoreActorViewController: UIViewController, ActorActionDelegate {
     }
     
     private func fetchData(page: Int) {
-        networkAgent.getPeopleList(page: page, success: { (respData) in
-            self.data.append(contentsOf: respData.results ?? [ActorInfoResponse]())
-            self.collectionViewActors.reloadData()
-        }, failure: { (error) in
-            print(error)
-        })
-
-
+        networkAgent.getPeopleList(page: page) { result in
+            switch result {
+            case .success(let data):
+                self.data.append(contentsOf: data.results ?? [ActorInfoResponse]())
+                self.collectionViewActors.reloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
+    
     func onTapActorImage(actorId: Int) {
         navigateToActorDetailsViewController(actorId: actorId)
     }

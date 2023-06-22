@@ -10,7 +10,7 @@ import UIKit
 class DetailsViewController: UIViewController {
     
     let networkAgent = MovieDBNetworkAgent.shared
-    
+    //MARK: - IBOutlet
     @IBOutlet weak var rateMovieButton: UIButton!
     
     @IBOutlet weak var similarMovieCollectionView: UICollectionView!
@@ -41,6 +41,8 @@ class DetailsViewController: UIViewController {
     
     // story line
     @IBOutlet weak var storyContentLabel: UILabel!
+    
+    //MARK: - Property
     private var productionCompanies : [ProductionCompany] = []
     
     var movieDetailsInfo: MovieDetailsResponse?
@@ -51,6 +53,10 @@ class DetailsViewController: UIViewController {
     var movieID: Int = -1
     private var movieTrailers: [MovieTrailer] = []
     
+    deinit {
+        print("This object is released")
+    }
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -63,7 +69,7 @@ class DetailsViewController: UIViewController {
         fetchSimilarMovies(id: movieID)
         fetchMovieTrailer(id: movieID)
     }
-    
+    // MARK: - InitView
     private func initView() {
         setUpCollectionViewCells()
         addGestureRecognizers()
@@ -97,49 +103,67 @@ class DetailsViewController: UIViewController {
     private func addGestureRecognizers() {
        
     }
+    //MARK: - API Methods
     // movie Trailer
     private func fetchMovieTrailer(id: Int) {
-        networkAgent.getMovieTrailerVideo(id: id) { data in
+        networkAgent.getMovieTrailerVideo(id: id) { [weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let data):
+                self.movieTrailers = data.results ?? []
+                self.btnPlayTrailer.isHidden = self.movieTrailers.isEmpty
+            case .failure(let error):
+                print(error.description)
+            }
             
-            self.movieTrailers = data.results ?? []
-            self.btnPlayTrailer.isHidden = self.movieTrailers.isEmpty
-            
-        } failure: { error in
-            
-            print(error.description)
         }
 
     }
     // similar movie data
     private func fetchSimilarMovies(id: Int) {
-        networkAgent.getSimilarMovieList(id: id) { data in
-            self.similarMovieList = data.results ?? []
-            self.similarMovieCollectionView.reloadData()
-        } failure: { error in
-            print(error.description)
+        networkAgent.getSimilarMovieList(id: id) { [weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let data):
+                self.similarMovieList = data.results ?? []
+                self.similarMovieCollectionView.reloadData()
+            case .failure(let error):
+                print(error.description)
+            }
+           
         }
 
     }
     // movie details
     private func fetchMovieDetailsInfo(id: Int){
-        networkAgent.getMovieDetailsInfo(id: id) { data in
-            self.bindData(data: data)
-        } failure: { error in
-            print(error.description)
+        networkAgent.getMovieDetailsInfo(id: id) { [weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let data):
+                self.bindData(data: data)
+
+            case .failure(let error):
+                print(error)
+            }
         }
     }
     // movie actor
     private func fetchMovieActorData(id: Int) {
-        networkAgent.getPeopleListById(id: id) { data in
-            self.actorData = data
-            self.actorList = data.cast ?? []
-            self.collectionViewActors.reloadData()
-            print("Actor count>>>>>", self.actorList.count)
-        } failure: { error in
-            print(error.description)
+        networkAgent.getPeopleListById(id: id) { [weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let data):
+                self.actorData = data
+                self.actorList = data.cast ?? []
+                self.collectionViewActors.reloadData()
+                print("Actor count>>>>>", self.actorList.count)
+            case .failure(let error):
+                print(error.description)
+            }
+            
         }
-
     }
+    // MARK: - UIButton
     @IBAction func onClickPlayTrailer(_ sender: UIButton) {
         // play trailer
         let item = movieTrailers.first
@@ -148,6 +172,8 @@ class DetailsViewController: UIViewController {
         playerVC.youtubeId = youtubeVdoKey
         self.present(playerVC, animated: true)
     }
+    
+    //MARK: - Bind Data
     // bind data
     private func bindData(data: MovieDetailsResponse) {
         productionCompanies = data.productionCompanies ?? [ProductionCompany]()
@@ -176,8 +202,11 @@ class DetailsViewController: UIViewController {
             genrelistStr += genreName.name + ", "
             genreList.append(genreName.name)
         }
-        genrelistStr.removeLast()
-        genrelistStr.removeLast()
+        if !genrelistStr.isEmpty {
+            genrelistStr.removeLast()
+            genrelistStr.removeLast()
+        }
+       
 
         genreCollectionView.reloadData()
         
@@ -205,6 +234,7 @@ class DetailsViewController: UIViewController {
         print("Tap for favourite list.....\(isFavourite)")
     }
 }
+// MARK: - UICollectionViewDataSource
 extension DetailsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == genreCollectionView {
@@ -237,12 +267,19 @@ extension DetailsViewController: UICollectionViewDataSource {
         } else if collectionView == similarMovieCollectionView {
             let cell = collectionView.dequeueCollectionCell(identifier: PopularFilmAndSeriesCollectionViewCell.identifier, indexPath: indexPath) as PopularFilmAndSeriesCollectionViewCell
             cell.data = similarMovieList[indexPath.row]
+            
+//            cell.onTapItem = { [weak self] id in
+//            guard let self = self else { return }
+//                self.navigateToMovieDetailsVC(movieId: id)
+//            }
+            
             return cell
         } else {
             return UICollectionViewCell()
         }
     }
 }
+//MARK: - UICollectionViewDelegateFlowLayout
 extension DetailsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == genreCollectionView {
