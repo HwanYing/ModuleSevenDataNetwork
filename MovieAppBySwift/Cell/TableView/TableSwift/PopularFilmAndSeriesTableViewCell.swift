@@ -11,6 +11,8 @@ class PopularFilmAndSeriesTableViewCell: UITableViewCell {
   
     @IBOutlet weak var popularCollectionView: UICollectionView!
     var delegate: MovieItemDelegate?=nil
+    var type: VideoType? = nil
+    
     @IBOutlet weak var titleLabel : UILabel!
     // 2....
     var data: MovieListResult? {
@@ -25,11 +27,17 @@ class PopularFilmAndSeriesTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
+        setUpCollectionViewCells()
+
+        
+    }
+    private func setUpCollectionViewCells() {
         popularCollectionView.dataSource = self
         popularCollectionView.delegate = self
         popularCollectionView.registerCollectionCell(identifier: PopularFilmAndSeriesCollectionViewCell.identifier)
+   
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
@@ -44,6 +52,7 @@ extension PopularFilmAndSeriesTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueCollectionCell(identifier: PopularFilmAndSeriesCollectionViewCell.identifier, indexPath: indexPath) as PopularFilmAndSeriesCollectionViewCell
         cell.data = data?.results?[indexPath.row]
+       
         return cell
         
     }
@@ -55,6 +64,7 @@ extension PopularFilmAndSeriesTableViewCell: UICollectionViewDelegateFlowLayout 
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = data?.results?[indexPath.row]
-        delegate?.onTapMovieItem(id: item?.id ?? 0)
+        delegate?.onTapMovie(id: item?.id ?? 0, type: type ?? VideoType.movie)
     }
+   
 }

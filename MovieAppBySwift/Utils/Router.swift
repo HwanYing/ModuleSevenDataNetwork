@@ -33,6 +33,12 @@ extension UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    func navigateToMoreTopRatedViewController(data: MovieListResult){
+        let vc = MoreTopRatedViewController()
+        vc.initData = data
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     func navigateToActorDetailsViewController(actorId: Int) {
         let vc = ActorDetailsViewController()
         vc.actorId = actorId
@@ -46,6 +52,12 @@ extension UIViewController {
         vc.movieID = movieId
 //        vc.modalTransitionStyle = .flipHorizontal
 //        present(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    // Series
+    func navigateToSeriesDetailsVC(id: Int) {
+       let vc = TVSeriesViewController()
+        vc.seriesID = id
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

@@ -8,9 +8,9 @@
 import UIKit
 
 class ActorDetailsViewController: UIViewController {
-
+    
     private let networkAgent = MovieDBNetworkAgent.shared
-
+    
     @IBOutlet weak var imgViewActor: UIImageView!
     @IBOutlet weak var actorNameLabel: UILabel!
     @IBOutlet weak var actorDOBLabel: UILabel!
@@ -19,20 +19,20 @@ class ActorDetailsViewController: UIViewController {
     @IBOutlet weak var readMoreView: UIView!
     
     @IBOutlet weak var tvCreditsCollectionView: UICollectionView!
-
+    
     var actorId: Int = -1
     var tvCreditsList: TVCreditsResponse?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tvCreditsCollectionView.delegate = self
         tvCreditsCollectionView.dataSource = self
         tvCreditsCollectionView.registerCollectionCell(identifier: PopularFilmAndSeriesCollectionViewCell.identifier)
         
         // Do any additional setup after loading the view.
         print("details for this actor id>>>>", actorId)
-
+        
         fetchActorBio(actorId: actorId)
         fetchTVCredits(actorId: actorId)
     }
@@ -46,7 +46,7 @@ class ActorDetailsViewController: UIViewController {
         bioContentLabel.text = data.biography
         
     }
-
+    
     // get actor bio
     func fetchActorBio(actorId: Int) {
         networkAgent.getActorBio(id: actorId) { result in
@@ -57,7 +57,7 @@ class ActorDetailsViewController: UIViewController {
                 print(error)
             }
         }
-
+        
     }
     // get tv credits list
     func fetchTVCredits(actorId: Int) {
@@ -70,10 +70,27 @@ class ActorDetailsViewController: UIViewController {
                 print(error)
             }
             
-        } 
-
+        }
+        
     }
+   
 }
+extension ActorDetailsViewController: MovieItemDelegate {
+    func onTapMovieItem(id: Int) {
+        navigateToMovieDetailsVC(movieId: id)
+    }
+    
+    func onTapMovie(id: Int, type: VideoType) {
+        switch type {
+        case .movie:
+            navigateToMovieDetailsVC(movieId: id)
+        case .series:
+            navigateToSeriesDetailsVC(id: id)
+        }
+    }
+    
+}
+
 extension ActorDetailsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return tvCreditsList?.cast?.count ?? 0
@@ -82,6 +99,10 @@ extension ActorDetailsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueCollectionCell(identifier: PopularFilmAndSeriesCollectionViewCell.identifier, indexPath: indexPath) as PopularFilmAndSeriesCollectionViewCell
         cell.tvCreditsList = tvCreditsList?.cast?[indexPath.row]
+//        cell.onTapItem = { [weak self] id in
+//            guard let self = self else { return }
+//            self.navigateToMovieDetailsVC(movieId: id)
+//        }
         return cell
     }
     
@@ -92,5 +113,9 @@ extension ActorDetailsViewController: UICollectionViewDelegateFlowLayout {
         
         return CGSize(width: 130, height: collectionView.frame.height)
         
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = tvCreditsList?.cast?[indexPath.row]
+        self.onTapMovieItem(id: item?.id ?? 0)
     }
 }

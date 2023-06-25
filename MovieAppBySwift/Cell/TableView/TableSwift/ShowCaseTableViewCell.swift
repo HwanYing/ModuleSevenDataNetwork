@@ -11,7 +11,11 @@ class ShowCaseTableViewCell: UITableViewCell {
     @IBOutlet weak var moreShowCaseLabel: UILabel!
     @IBOutlet weak var showCaseCollectionView: UICollectionView!
     
-    @IBOutlet weak var heightForShowCaseCollectionView: NSLayoutConstraint!
+//    @IBOutlet weak var heightForShowCaseCollectionView: NSLayoutConstraint!
+    
+    var onTapViewMore: ((MovieListResult)->Void) = { _ in }
+    var onTapMovieItem: ((Int)->Void) = { _ in }
+    
     var data: MovieListResult? {
         didSet {
             if let _ = data {
@@ -24,18 +28,19 @@ class ShowCaseTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         moreShowCaseLabel.underLineText(text: "MORE SHOWCASES")
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapMoreLabel))
+        moreShowCaseLabel.isUserInteractionEnabled = true
+        moreShowCaseLabel.addGestureRecognizer(tapGesture)
         setUpCollectionViewCells()
     }
-    
+    @objc func didTapMoreLabel() {
+        onTapViewMore(data!)
+    }
     private func setUpCollectionViewCells() {
         showCaseCollectionView.dataSource = self
         showCaseCollectionView.delegate = self
         showCaseCollectionView.registerCollectionCell(identifier: ShowCaseCollectionViewCell.identifier)
-        
-//        let itemWidth: CGFloat = showCaseCollectionView.frame.width - 60
-//        let itemHeight: CGFloat = (itemWidth / 16) * 9
-        print("collection view width >>>>> ", showCaseCollectionView.frame.width)
-//        heightForShowCaseCollectionView.constant = itemHeight
+
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -68,4 +73,9 @@ extension ShowCaseTableViewCell: UICollectionViewDelegateFlowLayout {
         // -1 for horizontal indicator and -2 for vertical indicator
         ((scrollView.subviews[(scrollView.subviews.count-1)]).subviews[0]).backgroundColor = UIColor(named: "color-yellow")
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = data?.results?[indexPath.row]
+        onTapMovieItem(item?.id ?? 0)
+    }
+   
 }

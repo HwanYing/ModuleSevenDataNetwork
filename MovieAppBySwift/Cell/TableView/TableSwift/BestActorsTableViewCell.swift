@@ -8,13 +8,15 @@
 import UIKit
 
 class BestActorsTableViewCell: UITableViewCell {
-    
+   
     @IBOutlet weak var moreActorsLabel: UILabel!
     @IBOutlet weak var bestActorCollectionView: UICollectionView!
     @IBOutlet weak var heightForActorCollectionView: NSLayoutConstraint!
+       
+    var onTapViewMore: ((ActorListResult)->Void) = { _ in  }
+    var onClickActorView: ((Int) -> Void) = { _ in }
+//    var delegate : ActorActionDelegate? = nil
     
-    var delegate: ActorActionDelegate?=nil
-
     var data: ActorListResult? {
         didSet {
             if let _ = data {
@@ -34,10 +36,11 @@ class BestActorsTableViewCell: UITableViewCell {
         
         setUpCollectionViewCells()
     }
-    
+  
     @objc func didTapMoreLabel() {
-        delegate?.onTapSeeMoreActor(data: data!)
+        onTapViewMore(data!)
     }
+   
     private func setUpCollectionViewCells() {
         bestActorCollectionView.dataSource = self
         bestActorCollectionView.delegate = self
@@ -81,6 +84,6 @@ extension BestActorsTableViewCell: UICollectionViewDelegateFlowLayout {
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = data?.results?[indexPath.row]
-        delegate?.onTapActorImage(actorId: item?.id ?? 0)
+        onClickActorView(item?.id ?? 0)
     }
 }

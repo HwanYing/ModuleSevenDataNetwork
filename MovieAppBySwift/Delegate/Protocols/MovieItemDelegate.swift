@@ -7,7 +7,15 @@
 
 import Foundation
 
+enum VideoType {
+    case series
+    case movie
+}
+
 protocol MovieItemDelegate {
     func onTapMovieItem(id: Int)
+//    func onTapViewMore(data: MovieListResult)
+    
+    func onTapMovie(id: Int, type: VideoType)
 }
 

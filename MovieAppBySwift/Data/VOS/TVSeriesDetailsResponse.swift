@@ -12,7 +12,7 @@ struct TVSeriesDetailsResponse: Codable {
     let adult: Bool?
     let backdropPath: String?
     let createdBy: [CreatedBy]?
-    let episodeRunTime: [JSONAny]?
+    let episodeRunTime: [String]?
     let firstAirDate: String?
     let genres: [Genre]?
     let homepage: String?
@@ -384,5 +384,5 @@ class JSONAny: Codable {
             try JSONAny.encode(to: &container, value: self.value)
         }
     }
-    
 }
+

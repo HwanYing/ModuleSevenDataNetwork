@@ -14,46 +14,35 @@ enum MDBResult<T> {
 }
 
 protocol MovieDBNetworkAgentProtocol {
-    func searchMovieByKeyword(query: String, page: String, completion: @escaping (MDBResult<MovieListResult>) -> Void)
-    func getActorGallery(id: Int, completion: @escaping (MDBResult<ActorInfoResponse>) -> Void)
-    func getTVCreditsList(id: Int, completion: @escaping (MDBResult<TVCreditsResponse>) -> Void)
-    func getActorBio(id: Int, completion: @escaping (MDBResult<ActorDetailsResponse>) -> Void)
+    /// Movie Details
     func getMovieTrailerVideo(id: Int, completion: @escaping (MDBResult<MovieTrailerResponse>) -> Void)
     func getSimilarMovieList(id: Int, completion: @escaping (MDBResult<MovieListResult>) -> Void)
-    
     func getMovieCreditById(id: Int, completion: @escaping (MDBResult<MovieActorResponse>) -> Void)
-    func getSerieDetailById(id: Int, completion: @escaping (MDBResult<MovieDetailsResponse>) -> Void)
     func getMovieDetailsInfo(id: Int, completion: @escaping (MDBResult<MovieDetailsResponse>) -> Void)
-    func getPeopleList(page: Int, completion: @escaping (MDBResult<ActorListResult>) -> Void)
+
+    /// Movies
     func getTopRatedMovieList(page: Int, completion: @escaping (MDBResult<MovieListResult>) -> Void)
     func getGenreList(completion: @escaping (MDBResult<MovieGenreList>) -> Void)
     func getPopularTVList(completion: @escaping (MDBResult<MovieListResult>) -> Void)
     func getPopularMovieList(page: Int, completion: @escaping (MDBResult<MovieListResult>) -> Void)
     func getUpcomingMovieList(page: Int, completion: @escaping (MDBResult<UpcomingMovieList>) -> Void)
     
+    /// Series
+    func getSerieDetailById(id: Int, completion: @escaping (MDBResult<MovieDetailsResponse>) -> Void)
+
+    /// Search
+    func searchMovieByKeyword(query: String, page: String, completion: @escaping (MDBResult<MovieListResult>) -> Void)
+
+    /// Actor
+    func getActorGallery(id: Int, completion: @escaping (MDBResult<ActorInfoResponse>) -> Void)
+    func getTVCreditsList(id: Int, completion: @escaping (MDBResult<TVCreditsResponse>) -> Void)
+    func getActorBio(id: Int, completion: @escaping (MDBResult<ActorDetailsResponse>) -> Void)
+    func getPeopleList(page: Int, completion: @escaping (MDBResult<ActorListResult>) -> Void)
+    func getPeopleListById(id: Int, completion: @escaping (MDBResult<MovieActorResponse>) -> Void) // movie actor
+    
 }
 
 struct MovieDBNetworkAgent : MovieDBNetworkAgentProtocol {
-    func getActorGallery(id: Int, completion: @escaping (MDBResult<ActorInfoResponse>) -> Void) {
-        //
-    }
-    
-    func getSerieDetailById(id: Int, completion: @escaping (MDBResult<MovieDetailsResponse>) -> Void) {
-        //
-    }
-    
-    func getPopularMovieList(page: Int, completion: @escaping (MDBResult<MovieListResult>) -> Void) {
-        AF.request(MDBEndpoint.popularMovie(page)
-                   , headers: headers)
-        .responseDecodable(of: MovieListResult.self){ resp in
-            switch resp.result {
-            case .success(let data):
-                completion(.success(data))
-            case .failure(let error):
-                completion(.failure(handleError(resp, error, MDBCommonResponseError.self)))
-            }
-        }
-    }
     
     // singleton object
     static let shared = MovieDBNetworkAgent()
@@ -67,6 +56,26 @@ struct MovieDBNetworkAgent : MovieDBNetworkAgentProtocol {
     func searchMovieByKeyword(query: String, page: String ,completion: @escaping (MDBResult<MovieListResult>) -> Void) {
         
         AF.request(MDBEndpoint.searchMovie(page, query)
+                   , headers: headers)
+        .responseDecodable(of: MovieListResult.self){ resp in
+            switch resp.result {
+            case .success(let data):
+                completion(.success(data))
+            case .failure(let error):
+                completion(.failure(handleError(resp, error, MDBCommonResponseError.self)))
+            }
+        }
+    }
+    func getActorGallery(id: Int, completion: @escaping (MDBResult<ActorInfoResponse>) -> Void) {
+        //
+    }
+    
+    func getSerieDetailById(id: Int, completion: @escaping (MDBResult<MovieDetailsResponse>) -> Void) {
+        //
+    }
+    
+    func getPopularMovieList(page: Int, completion: @escaping (MDBResult<MovieListResult>) -> Void) {
+        AF.request(MDBEndpoint.popularMovie(page)
                    , headers: headers)
         .responseDecodable(of: MovieListResult.self){ resp in
             switch resp.result {
@@ -148,7 +157,20 @@ struct MovieDBNetworkAgent : MovieDBNetworkAgentProtocol {
             }
         }
     }
-    
+    // for similar movie section
+//    func getSimilarMovieList1(id: Int, completion: @escaping (MovieListResult) -> Void, failure: @escaping (String) -> Void) {
+//
+//        AF.request(MDBEndpoint.similarMovie(id),
+//                   headers: headers)
+//        .responseDecodable(of: MovieListResult.self){ resp in
+//            switch resp.result {
+//            case .success(let data):
+//                completion(data)
+//            case .failure(let error):
+//                failure(error.errorDescription)
+//            }
+//        }
+//    }
     
     // Popular TV List
     func getPopularTVList(completion: @escaping (MDBResult<MovieListResult>) -> Void) {
@@ -212,7 +234,7 @@ struct MovieDBNetworkAgent : MovieDBNetworkAgentProtocol {
                 }
             }
     }
-    // best actor list
+    // popular actor list
     func getPeopleList(page: Int = 1, completion: @escaping (MDBResult<ActorListResult>) -> Void){
         AF.request(MDBEndpoint.popularActors(page), headers: headers)
             .responseDecodable(of: ActorListResult.self){ resp in
@@ -224,7 +246,7 @@ struct MovieDBNetworkAgent : MovieDBNetworkAgentProtocol {
                 }
             }
     }
-    // best actor list by Id
+    // movieActor
     func getPeopleListById(id: Int, completion: @escaping (MDBResult<MovieActorResponse>) -> Void){
         AF.request(MDBEndpoint.movieActors(id), headers: headers)
             .responseDecodable(of: MovieActorResponse.self){ resp in
@@ -262,6 +284,7 @@ struct MovieDBNetworkAgent : MovieDBNetworkAgentProtocol {
                 }
             }
     }
+   
     
     /**
      Network Error - Different Scenarios

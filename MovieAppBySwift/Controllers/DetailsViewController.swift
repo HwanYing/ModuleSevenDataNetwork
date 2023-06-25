@@ -8,8 +8,10 @@
 import UIKit
 
 class DetailsViewController: UIViewController {
+   
+//    let networkAgent = MovieDBNetworkAgent.shared
+    let movieModel: MovieModel = MovieModelImpl.shared
     
-    let networkAgent = MovieDBNetworkAgent.shared
     //MARK: - IBOutlet
     @IBOutlet weak var rateMovieButton: UIButton!
     
@@ -106,12 +108,14 @@ class DetailsViewController: UIViewController {
     //MARK: - API Methods
     // movie Trailer
     private func fetchMovieTrailer(id: Int) {
-        networkAgent.getMovieTrailerVideo(id: id) { [weak self] (result) in
+        movieModel.getMovieTrailerVideo(id: id) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
             case .success(let data):
-                self.movieTrailers = data.results ?? []
-                self.btnPlayTrailer.isHidden = self.movieTrailers.isEmpty
+                DispatchQueue.main.async {
+                    self.movieTrailers = data.results ?? []
+                    self.btnPlayTrailer.isHidden = self.movieTrailers.isEmpty
+                }
             case .failure(let error):
                 print(error.description)
             }
@@ -121,12 +125,14 @@ class DetailsViewController: UIViewController {
     }
     // similar movie data
     private func fetchSimilarMovies(id: Int) {
-        networkAgent.getSimilarMovieList(id: id) { [weak self] (result) in
+        movieModel.getSimilarMovieList(id: id) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
             case .success(let data):
-                self.similarMovieList = data.results ?? []
-                self.similarMovieCollectionView.reloadData()
+                DispatchQueue.main.async {
+                    self.similarMovieList = data.results ?? []
+                    self.similarMovieCollectionView.reloadData()
+                }
             case .failure(let error):
                 print(error.description)
             }
@@ -136,11 +142,13 @@ class DetailsViewController: UIViewController {
     }
     // movie details
     private func fetchMovieDetailsInfo(id: Int){
-        networkAgent.getMovieDetailsInfo(id: id) { [weak self] (result) in
+        movieModel.getMovieDetailsInfo(id: id) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
             case .success(let data):
-                self.bindData(data: data)
+                DispatchQueue.main.async {
+                    self.bindData(data: data)
+                }
 
             case .failure(let error):
                 print(error)
@@ -149,14 +157,16 @@ class DetailsViewController: UIViewController {
     }
     // movie actor
     private func fetchMovieActorData(id: Int) {
-        networkAgent.getPeopleListById(id: id) { [weak self] (result) in
+        movieModel.getPeopleListById(id: id) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
             case .success(let data):
-                self.actorData = data
-                self.actorList = data.cast ?? []
-                self.collectionViewActors.reloadData()
-                print("Actor count>>>>>", self.actorList.count)
+                DispatchQueue.main.async {
+                    self.actorData = data
+                    self.actorList = data.cast ?? []
+                    self.collectionViewActors.reloadData()
+                    print("Actor count>>>>>", self.actorList.count)
+                }
             case .failure(let error):
                 print(error.description)
             }
@@ -230,9 +240,32 @@ class DetailsViewController: UIViewController {
         storyContentLabel.text = data.overview
     }
     
+}
+
+extension DetailsViewController: ActorActionDelegate {
     func onTapFavourite(isFavourite: Bool) {
         print("Tap for favourite list.....\(isFavourite)")
     }
+    func onTapActorImage(actorId: Int) {
+        navigateToActorDetailsViewController(actorId: actorId)
+    }
+}
+
+extension DetailsViewController: MovieItemDelegate {
+    func onTapMovieItem(id: Int) {
+        navigateToMovieDetailsVC(movieId: id)
+    }
+    
+    func onTapMovie(id: Int, type: VideoType) {
+        switch type {
+        case .movie:
+            navigateToMovieDetailsVC(movieId: id)
+        case .series:
+            navigateToSeriesDetailsVC(id: id)
+        }
+    }
+    
+    
 }
 // MARK: - UICollectionViewDataSource
 extension DetailsViewController: UICollectionViewDataSource {
@@ -263,11 +296,11 @@ extension DetailsViewController: UICollectionViewDataSource {
             let cell = collectionView.dequeueCollectionCell(identifier: BestActorsCollectionViewCell.identifier, indexPath: indexPath) as BestActorsCollectionViewCell
 //            cell.delegate = self
             cell.data = actorData?.cast?[indexPath.row]
+        
             return cell
         } else if collectionView == similarMovieCollectionView {
             let cell = collectionView.dequeueCollectionCell(identifier: PopularFilmAndSeriesCollectionViewCell.identifier, indexPath: indexPath) as PopularFilmAndSeriesCollectionViewCell
             cell.data = similarMovieList[indexPath.row]
-            
 //            cell.onTapItem = { [weak self] id in
 //            guard let self = self else { return }
 //                self.navigateToMovieDetailsVC(movieId: id)
@@ -307,6 +340,16 @@ extension DetailsViewController: UICollectionViewDelegateFlowLayout {
         let fontAttributes = [NSAttributedString.Key.font : font]
         let textSize = text.size(withAttributes: fontAttributes)
         return textSize.width
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == collectionViewActors {
+            let item = actorData?.cast?[indexPath.row]
+            self.onTapActorImage(actorId: item?.id ?? 0)
+        }
+        if collectionView == similarMovieCollectionView {
+            let item = similarMovieList[indexPath.row]
+            self.onTapMovieItem(id: item.id ?? 0)
+        }
     }
 }
 

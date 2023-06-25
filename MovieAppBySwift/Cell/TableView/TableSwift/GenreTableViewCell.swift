@@ -12,6 +12,8 @@ class GenreTableViewCell: UITableViewCell {
     @IBOutlet var genreCollectionView: UICollectionView!
     @IBOutlet var movieCollectionView: UICollectionView!
 //    let genreList = [GenreVO(name: "ACTION", isSelected: true),GenreVO(name: "DRAMA", isSelected: false), GenreVO(name: "HORROR", isSelected: false), GenreVO(name: "TRIlLER", isSelected: false), GenreVO(name: "MAGIC", isSelected: false), GenreVO(name: "ADVENTUREEEEEE", isSelected: false), GenreVO(name: "BIOGRAPHY", isSelected: false)]
+    var onTapGenreMovie: ((Int)->Void) = { _ in }
+    
     var genreList: [GenreVO]? {
         didSet {
             if let _ = genreList {
@@ -146,5 +148,9 @@ extension GenreTableViewCell: UICollectionViewDelegateFlowLayout {
 //        return textSize.width
         return text.size(withAttributes: [NSAttributedString.Key.font: font]).width
 
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = selectedMovieList[indexPath.row]
+        onTapGenreMovie(item.id ?? 0)
     }
 }

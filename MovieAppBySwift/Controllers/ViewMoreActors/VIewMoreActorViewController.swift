@@ -27,6 +27,7 @@ class VIewMoreActorViewController: UIViewController, ActorActionDelegate {
         // Do any additional setup after loading the view.
         initView()
         initState()
+        navigationItem.title = "Actor List"
     }
     private func initView() {
         setupCollectionView()
@@ -58,9 +59,9 @@ class VIewMoreActorViewController: UIViewController, ActorActionDelegate {
         print("onTapFavorite")
     }
     
-    func onTapSeeMoreActor(data: ActorListResult) {
-        print("onTapSeeMore")
-    }
+//    func onTapSeeMoreActor(data: ActorListResult) {
+//        print("onTapSeeMore")
+//    }
     
 
     func setupCollectionView() {
@@ -84,7 +85,7 @@ extension VIewMoreActorViewController: UICollectionViewDataSource, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueCollectionCell(identifier: BestActorsCollectionViewCell.identifier, indexPath: indexPath) as BestActorsCollectionViewCell
-        cell.data1 = data[indexPath.row]
+        cell.mainActorData = data[indexPath.row]
         return cell
     }
     

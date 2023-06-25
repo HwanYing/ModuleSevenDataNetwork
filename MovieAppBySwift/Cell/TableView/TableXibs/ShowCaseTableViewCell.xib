@@ -59,7 +59,6 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="heightForShowCaseCollectionView" destination="LQf-bo-9aL" id="Z4n-sM-UNq"/>
                 <outlet property="moreShowCaseLabel" destination="9Jb-y2-4ny" id="UhN-W0-PsV"/>
                 <outlet property="showCaseCollectionView" destination="gIl-tT-VYH" id="Fht-vu-UqR"/>
             </connections>

@@ -25,7 +25,7 @@ struct ActorInfoResponse: Codable {
     let adult: Bool?
     let gender, id: Int?
     let knownFor: [KnownFor]?
-    let knownForDepartment: KnownForDepartment?
+    let knownForDepartment: String?
     let name: String?
     let popularity: Double?
     let profilePath: String?

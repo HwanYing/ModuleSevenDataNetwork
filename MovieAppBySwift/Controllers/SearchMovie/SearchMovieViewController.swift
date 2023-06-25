@@ -7,8 +7,8 @@
 
 import UIKit
 
-class SearchMovieViewController: UIViewController, MovieItemDelegate {
-
+class SearchMovieViewController: UIViewController {
+   
     @IBOutlet weak var collectionViewSearch: UICollectionView!
 
     private let searchBar = UISearchBar()
@@ -58,12 +58,16 @@ class SearchMovieViewController: UIViewController, MovieItemDelegate {
             }
         }
     }
+   
+}
+extension SearchMovieViewController: MovieItemDelegate {
     func onTapMovieItem(id: Int) {
         navigateToMovieDetailsVC(movieId: id)
     }
-    
+    func onTapMovie(id: Int, type: VideoType) {
+        
+    }
 }
-
 extension SearchMovieViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return searchResult.count
@@ -72,10 +76,7 @@ extension SearchMovieViewController: UICollectionViewDataSource, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueCollectionCell(identifier: PopularFilmAndSeriesCollectionViewCell.identifier, indexPath: indexPath) as PopularFilmAndSeriesCollectionViewCell
         cell.data = searchResult[indexPath.row]
-        cell.onTapItem = { id in
-            self.navigateToMovieDetailsVC(movieId: id)
-        }
-
+    
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -100,8 +101,9 @@ extension SearchMovieViewController: UICollectionViewDelegateFlowLayout {
         return itemSpacing
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = searchResult[indexPath.row]
-        self.onTapMovieItem(id: item.id ?? 0)
+            let item = searchResult[indexPath.row]
+            self.onTapMovieItem(id: item.id ?? 0)
+       
     }
 }
 extension SearchMovieViewController: UISearchBarDelegate {

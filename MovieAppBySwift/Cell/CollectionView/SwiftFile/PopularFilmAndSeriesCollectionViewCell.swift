@@ -13,7 +13,6 @@ class PopularFilmAndSeriesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageViewBackdrop: UIImageView!
     @IBOutlet weak var ratingStar: RatingControl!
     @IBOutlet weak var labelRating: UILabel!
-    var onTapItem : ((Int)->Void) = { _ in} // Closure
 
     var data: MovieResult? {
         didSet {
@@ -28,7 +27,10 @@ class PopularFilmAndSeriesCollectionViewCell: UICollectionViewCell {
                 let floorValue = floor(voteAverage * 10) / 10.0
                 labelRating.text = "\(floorValue)" // api max - 10, me max - 5
                 ratingStar.rating = Int(voteAverage * 0.5)
+                
+                
             }
+                
         }
     }
     
@@ -52,6 +54,7 @@ class PopularFilmAndSeriesCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+   
 
 }
 
