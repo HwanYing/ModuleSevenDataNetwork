@@ -13,10 +13,10 @@ class ShowCaseTableViewCell: UITableViewCell {
     
 //    @IBOutlet weak var heightForShowCaseCollectionView: NSLayoutConstraint!
     
-    var onTapViewMore: ((MovieListResult)->Void) = { _ in }
+    var onTapViewMore: (([MovieResult])->Void) = { _ in }
     var onTapMovieItem: ((Int)->Void) = { _ in }
     
-    var data: MovieListResult? {
+    var data: [MovieResult]? {
         didSet {
             if let _ = data {
                 showCaseCollectionView.reloadData()
@@ -53,12 +53,12 @@ class ShowCaseTableViewCell: UITableViewCell {
 extension ShowCaseTableViewCell: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return data?.results?.count ?? 0
+        return data?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueCollectionCell(identifier: ShowCaseCollectionViewCell.identifier, indexPath: indexPath) as ShowCaseCollectionViewCell
-        cell.data = data?.results?[indexPath.row]
+        cell.data = data?[indexPath.row]
         return cell
     }
 }
@@ -74,7 +74,7 @@ extension ShowCaseTableViewCell: UICollectionViewDelegateFlowLayout {
         ((scrollView.subviews[(scrollView.subviews.count-1)]).subviews[0]).backgroundColor = UIColor(named: "color-yellow")
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = data?.results?[indexPath.row]
+        let item = data?[indexPath.row]
         onTapMovieItem(item?.id ?? 0)
     }
    

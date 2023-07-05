@@ -13,11 +13,11 @@ class BestActorsTableViewCell: UITableViewCell {
     @IBOutlet weak var bestActorCollectionView: UICollectionView!
     @IBOutlet weak var heightForActorCollectionView: NSLayoutConstraint!
        
-    var onTapViewMore: ((ActorListResult)->Void) = { _ in  }
+    var onTapViewMore: (([ActorInfoResponse])->Void) = { _ in  }
     var onClickActorView: ((Int) -> Void) = { _ in }
 //    var delegate : ActorActionDelegate? = nil
     
-    var data: ActorListResult? {
+    var data: [ActorInfoResponse]? {
         didSet {
             if let _ = data {
                 bestActorCollectionView.reloadData()
@@ -64,14 +64,14 @@ class BestActorsTableViewCell: UITableViewCell {
 }
 extension BestActorsTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data?.results?.count ?? 0
+        return data?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BestActorsCollectionViewCell.identifier, for: indexPath) as? BestActorsCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.mainActorData = data?.results?[indexPath.row]
+        cell.mainActorData = data?[indexPath.row]
         return cell
     }
 }
@@ -83,7 +83,7 @@ extension BestActorsTableViewCell: UICollectionViewDelegateFlowLayout {
         return CGSize(width: itemWidth, height: itemHeight)
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = data?.results?[indexPath.row]
+        let item = data?[indexPath.row]
         onClickActorView(item?.id ?? 0)
     }
 }

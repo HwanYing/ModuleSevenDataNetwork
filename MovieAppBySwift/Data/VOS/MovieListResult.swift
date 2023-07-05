@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 // MARK: - MovieListResult
 struct MovieListResult: Codable {
@@ -28,7 +29,7 @@ struct MovieResult: Codable, Hashable {
     let id: Int?
     let originalLanguage, originalName, originalTitle, overview: String?
     let popularity: Double?
-    let posterPath, releaseDate, title: String?
+    let posterPath, releaseDate, firstAirDate, title: String?
     let video: Bool?
     let voteAverage: Double?
     let voteCount: Int?
@@ -44,9 +45,38 @@ struct MovieResult: Codable, Hashable {
         case overview, popularity
         case posterPath = "poster_path"
         case releaseDate = "release_date"
+        case firstAirDate = "first_air_date"
         case title, video
         case voteAverage = "vote_average"
         case voteCount = "vote_count"
     }
   
+    func getVideoType() -> VideoType {
+        return self.originalName != nil ? .series : .movie
+    }
+    
+    @discardableResult
+    func toMovieEntity(context: NSManagedObjectContext, groupType: BelongsToTypeEntity) -> MovieEntity {
+        let entity = MovieEntity(context: context)
+        entity.id = Int32(id!)
+        entity.adult = adult ?? false
+        entity.backdropPath = backdropPath
+        entity.genreIDs = genreIDS?.map({
+            String($0)
+        }).joined(separator: ",")
+        entity.originalLanguage = originalLanguage
+        entity.originalName = originalName
+        entity.originalTitle = originalTitle
+        entity.overview = overview
+        entity.popularity = popularity ?? 0
+        entity.posterPath = posterPath
+        entity.releaseDate = releaseDate ?? ""
+        entity.title = title
+        entity.video = video ?? false
+        entity.voteAverage = voteAverage ?? 0
+        entity.voteCount = Int64(voteCount ?? 0)
+        entity.addToBelongsToType(groupType)
+        return entity
+    }
 }
+

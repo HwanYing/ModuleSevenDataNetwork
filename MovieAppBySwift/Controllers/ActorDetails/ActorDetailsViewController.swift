@@ -9,7 +9,8 @@ import UIKit
 
 class ActorDetailsViewController: UIViewController {
     
-    private let networkAgent = MovieDBNetworkAgent.shared
+//    private let networkAgent = MovieDBNetworkAgent.shared
+    private let actorModel: ActorModel = ActorModelImpl.shared
     
     @IBOutlet weak var imgViewActor: UIImageView!
     @IBOutlet weak var actorNameLabel: UILabel!
@@ -38,18 +39,18 @@ class ActorDetailsViewController: UIViewController {
     }
     
     private func bindData(data: ActorDetailsResponse) {
-        
+        print("Poster path>>>> ", data.profilePath ?? "undefined")
         let posterPath = "\(AppConstants.baseImageUrl)\(data.profilePath ?? "")"
         imgViewActor.sd_setImage(with: URL(string: posterPath))
         actorNameLabel.text = data.name
         actorDOBLabel.text = data.birthday
         bioContentLabel.text = data.biography
-        
+        tvCreditsCollectionView.reloadData()
     }
     
     // get actor bio
     func fetchActorBio(actorId: Int) {
-        networkAgent.getActorBio(id: actorId) { result in
+        actorModel.getActorDetails(id: actorId) { (result) in
             switch result {
             case .success(let data):
                 self.bindData(data: data)
@@ -57,11 +58,19 @@ class ActorDetailsViewController: UIViewController {
                 print(error)
             }
         }
+//        networkAgent.getActorBio(id: actorId) { result in
+//            switch result {
+//            case .success(let data):
+//                self.bindData(data: data)
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
         
     }
     // get tv credits list
     func fetchTVCredits(actorId: Int) {
-        networkAgent.getTVCreditsList(id: actorId) { result in
+        actorModel.getTVCredits(id: actorId) { (result) in
             switch result {
             case .success(let data):
                 self.tvCreditsList = data
@@ -69,8 +78,17 @@ class ActorDetailsViewController: UIViewController {
             case .failure(let error):
                 print(error)
             }
-            
         }
+//        networkAgent.getTVCreditsList(id: actorId) { result in
+//            switch result {
+//            case .success(let data):
+//                self.tvCreditsList = data
+//                self.tvCreditsCollectionView.reloadData()
+//            case .failure(let error):
+//                print(error)
+//            }
+//
+//        }
         
     }
    

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 // MARK: - ActorDetailsResponse
 struct ActorDetailsResponse: Codable {
@@ -30,6 +31,28 @@ struct ActorDetailsResponse: Codable {
         case placeOfBirth = "place_of_birth"
         case popularity
         case profilePath = "profile_path"
+    }
+    
+    @discardableResult
+    func toActorEntity(context: NSManagedObjectContext) -> ActorEntity {
+        let entity = ActorEntity(context: context)
+        entity.id = Int32(id!)
+        entity.adult = adult ?? false
+        entity.gender = Int32(gender ?? 0)
+        entity.knownForDepartment = knownForDepartment
+        entity.alsoKnownAs = alsoKnownAs.map({
+            $0
+        })?.joined(separator: ",")
+        entity.name = name
+        entity.popularity = popularity ?? 0.0
+        entity.profilePath = profilePath
+        entity.biography = biography
+        entity.birthday = birthday
+        entity.deathday = deathday
+        entity.homePage = homepage
+        entity.imdbID = imdbID
+        entity.placeOfBirth = placeOfBirth
+        return entity
     }
 }
 

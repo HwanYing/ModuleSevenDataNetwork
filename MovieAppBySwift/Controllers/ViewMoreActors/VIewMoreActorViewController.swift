@@ -19,7 +19,8 @@ class VIewMoreActorViewController: UIViewController, ActorActionDelegate {
     private let numberOfItemsPerRow = 3
     private var totalPages: Int = 1
     private var currentPage: Int = 1
-    private let networkAgent = MovieDBNetworkAgent.shared
+//    private let networkAgent = MovieDBNetworkAgent.shared
+    private let actorModel: ActorModel = ActorModelImpl.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,15 +42,24 @@ class VIewMoreActorViewController: UIViewController, ActorActionDelegate {
     }
     
     private func fetchData(page: Int) {
-        networkAgent.getPeopleList(page: page) { result in
+        actorModel.getPopularPeople(page: page) { (result) in
             switch result {
             case .success(let data):
-                self.data.append(contentsOf: data.results ?? [ActorInfoResponse]())
+                self.data.append(contentsOf: data)
                 self.collectionViewActors.reloadData()
             case .failure(let error):
                 print(error)
             }
         }
+//        networkAgent.getPeopleList(page: page) { result in
+//            switch result {
+//            case .success(let data):
+//                self.data.append(contentsOf: data.results ?? [ActorInfoResponse]())
+//                self.collectionViewActors.reloadData()
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
     }
     
     func onTapActorImage(actorId: Int) {

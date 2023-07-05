@@ -32,7 +32,7 @@ class BestActorsCollectionViewCell: UICollectionViewCell {
         }
     }
     // cast for movie result
-    var data: Cast? {
+    var data: MovieCast? {
         didSet {
             if let data = data {
                 let nameTitle = data.name ?? "undefined"

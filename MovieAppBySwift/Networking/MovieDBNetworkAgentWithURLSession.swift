@@ -214,7 +214,7 @@ class MovieDBNetworkAgentWithURLSession: MovieDBNetworkAgentProtocol {
         var request = URLRequest(url: url!)
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("\(AppConstants.accessToken)", forHTTPHeaderField: "Authorization")
-        
+
         request.httpMethod = "GET"
         let session = URLSession.shared
         session.dataTask(with: request) { data, response, error in
@@ -227,53 +227,53 @@ class MovieDBNetworkAgentWithURLSession: MovieDBNetworkAgentProtocol {
             } else {
                 completion(.failure(error!.localizedDescription))
             }
-            
+
         }
         .resume()
     }
     
     func getPopularTVList(completion: @escaping (MDBResult<MovieListResult>) -> Void) {
-        let url = URL(string: "\(AppConstants.BaseURL)/tv/popular")!
-        var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = "GET"
-        urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
-        urlRequest.addValue("\(AppConstants.accessToken)", forHTTPHeaderField: "Authorization")
-        
-        let session = URLSession.shared
-        
-        session.dataTask(with: urlRequest) { data, response, error in
-            let statusCode = (response as! HTTPURLResponse).statusCode
-            let successRange = 200..<300
-            if successRange.contains(statusCode) {
-                let movieList: MovieListResult = try! JSONDecoder().decode(MovieListResult.self, from: data!)
-                completion(.success(movieList))
-                print(movieList.results!.count)
-            } else {
-                completion(.failure(error!.localizedDescription))
-            }
-        }.resume()
+//        let url = URL(string: "\(AppConstants.BaseURL)/tv/popular")!
+//        var urlRequest = URLRequest(url: url)
+//        urlRequest.httpMethod = "GET"
+//        urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
+//        urlRequest.addValue("\(AppConstants.accessToken)", forHTTPHeaderField: "Authorization")
+//
+//        let session = URLSession.shared
+//
+//        session.dataTask(with: urlRequest) { data, response, error in
+//            let statusCode = (response as! HTTPURLResponse).statusCode
+//            let successRange = 200..<300
+//            if successRange.contains(statusCode) {
+//                let movieList: MovieListResult = try! JSONDecoder().decode(MovieListResult.self, from: data!)
+//                completion(.success(movieList))
+//                print(movieList.results!.count)
+//            } else {
+//                completion(.failure(error!.localizedDescription))
+//            }
+//        }.resume()
     }
     
     func getPopularMovieList(page: Int, completion: @escaping (MDBResult<MovieListResult>) -> Void) {
-        let url = URL(string: "\(AppConstants.BaseURL)/movie/popular?page=\(page)")!
-        var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = "GET"
-        urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
-        urlRequest.addValue("\(AppConstants.accessToken)", forHTTPHeaderField: "Authorization")
-        
-        let session = URLSession.shared
-        
-        session.dataTask(with: urlRequest) { data, response, error in
-            let statusCode = (response as! HTTPURLResponse).statusCode
-            let successRange = 200..<300
-            if successRange.contains(statusCode) {
-                let popularList: MovieListResult = try! JSONDecoder().decode(MovieListResult.self, from: data!)
-                completion(.success(popularList))
-                print(popularList.results!.count)
-            } else {
-                completion(.failure(error!.localizedDescription))
-            }
-        }.resume()
+//        let url = URL(string: "\(AppConstants.BaseURL)/movie/popular?page=\(page)")!
+//        var urlRequest = URLRequest(url: url)
+//        urlRequest.httpMethod = "GET"
+//        urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
+//        urlRequest.addValue("\(AppConstants.accessToken)", forHTTPHeaderField: "Authorization")
+//
+//        let session = URLSession.shared
+//
+//        session.dataTask(with: urlRequest) { data, response, error in
+//            let statusCode = (response as! HTTPURLResponse).statusCode
+//            let successRange = 200..<300
+//            if successRange.contains(statusCode) {
+//                let popularList: MovieListResult = try! JSONDecoder().decode(MovieListResult.self, from: data!)
+//                completion(.success(popularList))
+//                print(popularList.results!.count)
+//            } else {
+//                completion(.failure(error!.localizedDescription))
+//            }
+//        }.resume()
     }
     
     func getUpcomingMovieList(page: Int, completion: @escaping (MDBResult<UpcomingMovieList>) -> Void) {
@@ -293,53 +293,53 @@ class MovieDBNetworkAgentWithURLSession: MovieDBNetworkAgentProtocol {
             } else {
                 completion(.failure(error!.localizedDescription))
             }
-           
+
         }
         .resume()
     }
     
     func getPeopleList(page: Int = 1, completion: @escaping (MDBResult<ActorListResult>) -> Void) {
-        let url = URL(string: "\(AppConstants.BaseURL)/person/popular?page=\(page)")!
-        var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = "GET"
-        urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
-        urlRequest.addValue("\(AppConstants.accessToken)", forHTTPHeaderField: "Authorization")
-        
-        let session = URLSession.shared
-        
-        session.dataTask(with: urlRequest) { data, response, error in
-            let statusCode = (response as! HTTPURLResponse).statusCode
-            let successRange = 200..<300
-            if successRange.contains(statusCode) {
-                let actorList: ActorListResult = try! JSONDecoder().decode(ActorListResult.self, from: data!)
-                completion(.success(actorList))
-                print(actorList.results!.count)
-            } else {
-                completion(.failure(error!.localizedDescription))
-            }
-        }.resume()
+//        let url = URL(string: "\(AppConstants.BaseURL)/person/popular?page=\(page)")!
+//        var urlRequest = URLRequest(url: url)
+//        urlRequest.httpMethod = "GET"
+//        urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
+//        urlRequest.addValue("\(AppConstants.accessToken)", forHTTPHeaderField: "Authorization")
+//
+//        let session = URLSession.shared
+//
+//        session.dataTask(with: urlRequest) { data, response, error in
+//            let statusCode = (response as! HTTPURLResponse).statusCode
+//            let successRange = 200..<300
+//            if successRange.contains(statusCode) {
+//                let actorList: ActorListResult = try! JSONDecoder().decode(ActorListResult.self, from: data!)
+//                completion(.success(actorList))
+//                print(actorList.results!.count)
+//            } else {
+//                completion(.failure(error!.localizedDescription))
+//            }
+//        }.resume()
     }
     
     func getPeopleListById(id: Int, completion: @escaping (MDBResult<MovieActorResponse>) -> Void) {
-        let url = URL(string: "\(AppConstants.BaseURL)/movie/\(id)/credits")!
-        var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = "GET"
-        urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
-        urlRequest.addValue("\(AppConstants.accessToken)", forHTTPHeaderField: "Authorization")
-        
-        let session = URLSession.shared
-        
-        session.dataTask(with: urlRequest) { data, response, error in
-            let statusCode = (response as! HTTPURLResponse).statusCode
-            let successRange = 200..<300
-            if successRange.contains(statusCode) {
-                let peopleList : MovieActorResponse = try! JSONDecoder().decode(MovieActorResponse.self, from: data!)
-                completion(.success(peopleList))
-                print(peopleList.cast!.count)
-            } else {
-                completion(.failure(error!.localizedDescription))
-            }
-        }.resume()
+//        let url = URL(string: "\(AppConstants.BaseURL)/movie/\(id)/credits")!
+//        var urlRequest = URLRequest(url: url)
+//        urlRequest.httpMethod = "GET"
+//        urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
+//        urlRequest.addValue("\(AppConstants.accessToken)", forHTTPHeaderField: "Authorization")
+//        
+//        let session = URLSession.shared
+//        
+//        session.dataTask(with: urlRequest) { data, response, error in
+//            let statusCode = (response as! HTTPURLResponse).statusCode
+//            let successRange = 200..<300
+//            if successRange.contains(statusCode) {
+//                let peopleList : MovieActorResponse = try! JSONDecoder().decode(MovieActorResponse.self, from: data!)
+//                completion(.success(peopleList))
+//                print(peopleList.cast!.count)
+//            } else {
+//                completion(.failure(error!.localizedDescription))
+//            }
+//        }.resume()
     }
     
 }

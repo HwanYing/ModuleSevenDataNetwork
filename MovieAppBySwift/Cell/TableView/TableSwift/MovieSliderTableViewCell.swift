@@ -13,10 +13,10 @@ class MovieSliderTableViewCell: UITableViewCell {
     @IBOutlet weak var mainSliderCollectionView: UICollectionView!
     var delegate: MovieItemDelegate?=nil
     
-    var data: UpcomingMovieList? {
+    var data: [MovieResult]? { // For upcoming movie result
         didSet {
             if let data = data {
-                sliderPageControl.numberOfPages = data.results?.count ?? 0
+                sliderPageControl.numberOfPages = data.count
                 mainSliderCollectionView.reloadData()
             }
         }
@@ -41,13 +41,13 @@ class MovieSliderTableViewCell: UITableViewCell {
 }
 extension MovieSliderTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data?.results?.count ?? 0
+        return data?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueCollectionCell(identifier: MovieSliderCollectionViewCell.identifier, indexPath: indexPath) as MovieSliderCollectionViewCell
         /// data
-        cell.data = data?.results?[indexPath.row]
+        cell.data = data?[indexPath.row]
         
         return cell
     }
@@ -64,7 +64,7 @@ extension MovieSliderTableViewCell: UICollectionViewDelegateFlowLayout {
         sliderPageControl.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = data?.results?[indexPath.row]
+        let item = data?[indexPath.row]
         delegate?.onTapMovieItem(id: item?.id ?? 0)
     }
 }

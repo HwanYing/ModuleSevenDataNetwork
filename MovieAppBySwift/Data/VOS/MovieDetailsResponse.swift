@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 // MARK: - MovieDetailsResponse
 public struct MovieDetailsResponse: Codable {
@@ -22,6 +23,7 @@ public struct MovieDetailsResponse: Codable {
     public let productionCompanies: [ProductionCompany]?
     public let productionCountries: [ProductionCountry]?
     public let releaseDate: String?
+    public let firstAirDate: String?
     public let revenue, runtime: Int?
     public let spokenLanguages: [SpokenLanguage]?
     public let status, tagline, title: String?
@@ -42,11 +44,34 @@ public struct MovieDetailsResponse: Codable {
         case productionCompanies = "production_companies"
         case productionCountries = "production_countries"
         case releaseDate = "release_date"
+        case firstAirDate = "first_air_date"
         case revenue, runtime
         case spokenLanguages = "spoken_languages"
         case status, tagline, title, video
         case voteAverage = "vote_average"
         case voteCount = "vote_count"
+    }
+    @discardableResult
+    func toMovieEntity(context: NSManagedObjectContext) -> MovieEntity {
+        let entity = MovieEntity(context: context)
+        entity.id = Int32(id!)
+        entity.adult = adult ?? false
+        entity.backdropPath = backdropPath
+        entity.genreIDs = genres?.map({
+            String($0.id)
+        }).joined(separator: ",")
+        entity.originalLanguage = originalLanguage
+        entity.originalName = originalTitle
+        entity.originalTitle = originalTitle
+        entity.overview = overview
+        entity.popularity = popularity ?? 0
+        entity.posterPath = posterPath
+        entity.releaseDate = releaseDate ?? ""
+        entity.title = title
+        entity.video = video ?? false
+        entity.voteAverage = voteAverage ?? 0
+        entity.voteCount = Int64(voteCount ?? 0)
+        return entity
     }
 }
 
@@ -63,7 +88,7 @@ public struct BelongsToCollection: Codable {
 }
 
 // MARK: - ProductionCompany
-public struct ProductionCompany: Codable {
+public struct ProductionCompany: Codable, Hashable {
    public let id: Int?
    public let logoPath: String?
    public let name, originCountry: String?
@@ -77,7 +102,7 @@ public struct ProductionCompany: Codable {
 }
 
 // MARK: - ProductionCountry
-public struct ProductionCountry: Codable {
+public struct ProductionCountry: Codable, Hashable {
     public let iso3166_1, name: String?
     
     enum CodingKeys: String, CodingKey {
@@ -87,7 +112,7 @@ public struct ProductionCountry: Codable {
 }
 
 // MARK: - SpokenLanguage
-public struct SpokenLanguage: Codable {
+public struct SpokenLanguage: Codable, Hashable {
     public let englishName, iso639_1, name: String?
     
     enum CodingKeys: String, CodingKey {

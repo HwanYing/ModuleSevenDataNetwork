@@ -47,7 +47,7 @@ struct MovieGenreList : Codable {
     let genres: [MovieGenre]
 }
 
-public struct MovieGenre : Codable {
+public struct MovieGenre : Codable, Hashable {
     public let id: Int
     public let name: String
     

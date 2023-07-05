@@ -10,7 +10,8 @@ import UIKit
 class DetailsViewController: UIViewController {
    
 //    let networkAgent = MovieDBNetworkAgent.shared
-    let movieModel: MovieModel = MovieModelImpl.shared
+//    let movieModel: MovieModel = MovieModelImpl.shared
+    let movieDetailModel: MovieDetailModel = MovieDetailModelImpl.shared
     
     //MARK: - IBOutlet
     @IBOutlet weak var rateMovieButton: UIButton!
@@ -49,7 +50,7 @@ class DetailsViewController: UIViewController {
     
     var movieDetailsInfo: MovieDetailsResponse?
     var actorData: MovieActorResponse?
-    var actorList: [Cast] = []
+    var actorList: [MovieCast] = []
     var genreList: [String] = []
     var similarMovieList: [MovieResult] = []
     var movieID: Int = -1
@@ -108,8 +109,7 @@ class DetailsViewController: UIViewController {
     //MARK: - API Methods
     // movie Trailer
     private func fetchMovieTrailer(id: Int) {
-        movieModel.getMovieTrailerVideo(id: id) { [weak self] (result) in
-            guard let self = self else { return }
+        movieDetailModel.getMovieTrailers(id: id) { (result) in
             switch result {
             case .success(let data):
                 DispatchQueue.main.async {
@@ -119,59 +119,104 @@ class DetailsViewController: UIViewController {
             case .failure(let error):
                 print(error.description)
             }
-            
         }
+//        movieModel.getMovieTrailerVideo(id: id) { [weak self] (result) in
+//            guard let self = self else { return }
+//            switch result {
+//            case .success(let data):
+//                DispatchQueue.main.async {
+//                    self.movieTrailers = data.results ?? []
+//                    self.btnPlayTrailer.isHidden = self.movieTrailers.isEmpty
+//                }
+//            case .failure(let error):
+//                print(error.description)
+//            }
+//
+//        }
 
     }
     // similar movie data
     private func fetchSimilarMovies(id: Int) {
-        movieModel.getSimilarMovieList(id: id) { [weak self] (result) in
-            guard let self = self else { return }
+        movieDetailModel.getSimilarMovies(id: id) { (result) in
             switch result {
             case .success(let data):
                 DispatchQueue.main.async {
-                    self.similarMovieList = data.results ?? []
+                    self.similarMovieList = data
                     self.similarMovieCollectionView.reloadData()
                 }
             case .failure(let error):
                 print(error.description)
             }
-           
         }
+//        movieModel.getSimilarMovieList(id: id) { [weak self] (result) in
+//            guard let self = self else { return }
+//            switch result {
+//            case .success(let data):
+//                DispatchQueue.main.async {
+//                    self.similarMovieList = data.results ?? []
+//                    self.similarMovieCollectionView.reloadData()
+//                }
+//            case .failure(let error):
+//                print(error.description)
+//            }
+//
+//        }
 
     }
     // movie details
     private func fetchMovieDetailsInfo(id: Int){
-        movieModel.getMovieDetailsInfo(id: id) { [weak self] (result) in
-            guard let self = self else { return }
+        movieDetailModel.getMovieDetailById(id: id) { (result) in
             switch result {
             case .success(let data):
                 DispatchQueue.main.async {
                     self.bindData(data: data)
                 }
-
+                
             case .failure(let error):
                 print(error)
             }
         }
+//        movieModel.getMovieDetailsInfo(id: id) { [weak self] (result) in
+//            guard let self = self else { return }
+//            switch result {
+//            case .success(let data):
+//                DispatchQueue.main.async {
+//                    self.bindData(data: data)
+//                }
+//
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
     }
     // movie actor
     private func fetchMovieActorData(id: Int) {
-        movieModel.getPeopleListById(id: id) { [weak self] (result) in
-            guard let self = self else { return }
+        movieDetailModel.getMovieCreditById(id: id) { (result) in
             switch result {
             case .success(let data):
                 DispatchQueue.main.async {
-                    self.actorData = data
-                    self.actorList = data.cast ?? []
+                    self.actorList = data
                     self.collectionViewActors.reloadData()
                     print("Actor count>>>>>", self.actorList.count)
                 }
             case .failure(let error):
                 print(error.description)
             }
-            
         }
+//        movieModel.getPeopleListById(id: id) { [weak self] (result) in
+//            guard let self = self else { return }
+//            switch result {
+//            case .success(let data):
+//                DispatchQueue.main.async {
+//                    self.actorList = data.cast ?? []
+//                    self.collectionViewActors.reloadData()
+//                    print("Actor count>>>>>", self.actorList.count)
+//                }
+//            case .failure(let error):
+//                print(error.description)
+//            }
+//
+//        }
     }
     // MARK: - UIButton
     @IBAction func onClickPlayTrailer(_ sender: UIButton) {
@@ -295,7 +340,7 @@ extension DetailsViewController: UICollectionViewDataSource {
         } else if collectionView == collectionViewActors {
             let cell = collectionView.dequeueCollectionCell(identifier: BestActorsCollectionViewCell.identifier, indexPath: indexPath) as BestActorsCollectionViewCell
 //            cell.delegate = self
-            cell.data = actorData?.cast?[indexPath.row]
+            cell.data = actorList[indexPath.row]
         
             return cell
         } else if collectionView == similarMovieCollectionView {

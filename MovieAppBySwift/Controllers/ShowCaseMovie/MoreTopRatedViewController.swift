@@ -16,7 +16,8 @@ class MoreTopRatedViewController: UIViewController, MovieItemDelegate {
 
     private var totalPages: Int = 1
     private var currentPage: Int = 1
-    private let networkAgent = MovieDBNetworkAgent.shared
+//    private let networkAgent = MovieDBNetworkAgent.shared
+    private let movieModel1 : MovieModel1 = MovieModelImpl1.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,15 +52,24 @@ class MoreTopRatedViewController: UIViewController, MovieItemDelegate {
         }
     }
     private func fetchData(page: Int) {
-        networkAgent.getTopRatedMovieList(page: page) { result in
+        movieModel1.getTopRatedMovieList(page: page) { (result) in
             switch result {
             case .success(let data):
-                self.data.append(contentsOf: data.results ?? [MovieResult]())
+                self.data.append(contentsOf: data)
                 self.showCaseCollectionView.reloadData()
             case .failure(let error):
                 print(error)
             }
         }
+//        networkAgent.getTopRatedMovieList(page: page) { result in
+//            switch result {
+//            case .success(let data):
+//                self.data.append(contentsOf: data.results ?? [MovieResult]())
+//                self.showCaseCollectionView.reloadData()
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
     }
     func onTapMovieItem(id: Int) {
         self.navigateToMovieDetailsVC(movieId: id)

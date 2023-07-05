@@ -19,6 +19,10 @@ struct UpcomingMovieList: Codable {
         case totalPages = "total_pages"
         case totalResults = "total_results"
     }
+    
+    func convertToMovieListResult() -> MovieListResult {
+        return MovieListResult(page: page, results: results, totalPages: totalPages, totalResults: totalResults)
+    }
 }
 
 // MARK: - Dates

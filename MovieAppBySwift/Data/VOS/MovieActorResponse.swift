@@ -6,15 +6,16 @@
 //
 
 import Foundation
+import CoreData
 
 // MARK: - MovieActorResponse
 struct MovieActorResponse: Codable {
     let id: Int?
-    let cast, crew: [Cast]?
+    let cast, crew: [MovieCast]?
     let totalPages, totalResults: Int?
 }
 // MARK: - Cast
-struct Cast: Codable {
+struct MovieCast: Codable {
     let adult: Bool?
     let gender, id: Int?
     let knownForDepartment: String?
@@ -38,5 +39,15 @@ struct Cast: Codable {
         case character
         case creditID = "credit_id"
         case order, department, job
+    }
+    
+    @discardableResult
+    func toActorEntity(context: NSManagedObjectContext, movieId: Int, groupType: MovieSerieGroupType) -> ActorEntity {
+        let entity = ActorEntity(context: context)
+//        entity.adult = adult
+//        entity.alsoKnownAs = name
+//        entity.gender = gender
+//        entity.
+        return entity
     }
 }
