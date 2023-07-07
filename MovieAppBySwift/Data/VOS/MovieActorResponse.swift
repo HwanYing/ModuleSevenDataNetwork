@@ -42,12 +42,17 @@ struct MovieCast: Codable {
     }
     
     @discardableResult
-    func toActorEntity(context: NSManagedObjectContext, movieId: Int, groupType: MovieSerieGroupType) -> ActorEntity {
+    func toActorEntity(context: NSManagedObjectContext, movieId: Int, groupType: BelongsToTypeEntity) -> ActorEntity {
         let entity = ActorEntity(context: context)
-//        entity.adult = adult
-//        entity.alsoKnownAs = name
-//        entity.gender = gender
-//        entity.
+        entity.id = Int32(id!)
+        entity.name = name
+        entity.profilePath = profilePath
+        entity.imdbID = "\(String(describing: castID))"
+        entity.popularity = popularity ?? 0.0
+        entity.knownForDepartment = knownForDepartment
+        entity.adult = adult!
+        entity.gender = Int32(gender!)
+    
         return entity
     }
 }

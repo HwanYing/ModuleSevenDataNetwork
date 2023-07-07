@@ -7,14 +7,17 @@
 
 import Foundation
 import CoreData
+import RealmSwift
 
 class BaseRepository: NSObject {
+    
+    var coreData = CoreDataStack.shared
+    
+    let realmInstance = MovieDBRealm.shared
     
     override init() {
         super.init()
     }
-    
-    var coreData = CoreDataStack.shared
     
 //    func handleCoreDataError(_ anError: Error?) -> String {
 //        if let anError = anError, (anError as NSError).domain == "NSCocoaErrorDomain" {

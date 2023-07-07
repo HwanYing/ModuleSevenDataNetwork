@@ -28,20 +28,27 @@ class MovieRepositoryImpl: BaseRepository, MovieRepository {
         let contentTypeRepo: ContentTypeRepository = ContentTypeRepositoryImpl.shared
     
     func getDetail(id: Int, completion: @escaping (MovieDetailsResponse?) -> Void) {
-        let fetchRequest : NSFetchRequest<MovieEntity> = getMovieFetchRequestById(id)
-        
-        if let items = try? coreData.context.fetch(fetchRequest),
-           let firstItem = items.first {
-            completion(MovieEntity.toMovieDetailResponse(entity: firstItem))
-        } else {
-            completion(nil)
+        // background queue to
+        coreData.context.perform {
+            // main queue
+            let fetchRequest : NSFetchRequest<MovieEntity> = self.getMovieFetchRequestById(id)
+            
+            if let items = try? self.coreData.context.fetch(fetchRequest),
+               let firstItem = items.first {
+                completion(MovieEntity.toMovieDetailResponse(entity: firstItem))
+            } else {
+                completion(nil)
+            }
         }
+       
     }
     
     func saveDetail(data: MovieDetailsResponse) {
-        
-        let _ = data.toMovieEntity(context: coreData.context)
-        coreData.saveContext()
+        coreData.context.perform {
+            // main queue
+            let _ = data.toMovieEntity(context: self.coreData.context)
+            self.coreData.saveContext()
+        }
     }
     
     func saveSimilarContent(id: Int, data: [MovieResult]) {
@@ -53,10 +60,10 @@ class MovieRepositoryImpl: BaseRepository, MovieRepository {
     }
     
     func saveCasts(id: Int, data: [MovieCast]) {
-//        data.forEach {
-//            $0.toMovieEntity(context: self.coreData.context, movieId: id, groupType: contentTypeRepo.getBelongsToTypeEntity(type: .actorCredits))
-//        }
-//        self.coreData.saveContext()
+        data.forEach {
+            $0.toActorEntity(context: self.coreData.context, movieId: id, groupType: contentTypeRepo.getBelongsToTypeEntity(type: MovieSerieGroupType.actorCredits))
+        }
+        self.coreData.saveContext()
     }
     
     func getCasts(id: Int, completion: @escaping ([MovieCast]) -> Void) {
@@ -67,6 +74,8 @@ class MovieRepositoryImpl: BaseRepository, MovieRepository {
             movieCasts.append(ActorEntity.toMovieCast(entity: entity))
             completion(movieCasts)
         })
+//        if let movieObject =
+        
         
     }
     
@@ -89,6 +98,7 @@ class MovieRepositoryImpl: BaseRepository, MovieRepository {
         ]
         return fetchRequest
     }
+    
     private func getMovieCastsFetchRequestByID(_ movieId: Int) -> NSFetchRequest<ActorEntity> {
         let fetchRequest: NSFetchRequest<ActorEntity> = ActorEntity.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "%K = %@", "id", "\(movieId)")
